@@ -18,6 +18,7 @@ class Products extends React.Component {
       data: {
         categories: [
           {
+            name: 'loading...',
             products: [
               { name: 'loading...', category: 'loading...' },
             ],
