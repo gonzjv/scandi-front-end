@@ -5,13 +5,18 @@ client.setEndpoint('http://localhost:4000/');
 
 const productFields = ['name', 'category'];
 
-const productQuery = new Query('categories', true)
+// const productQuery = new Query('categories', true)
+//   .addField(new Field('name'))
+//   .addField(new Field('products').addFieldList(productFields));
+
+const productQuery = new Query('category', true)
+  .addArgument('input', 'CategoryInput', { title: 'tech' })
   .addField(new Field('name'))
   .addField(new Field('products').addFieldList(productFields));
 // .addArgument('id', 'String!', 'huarache-x-stussy-le')
 // .addFieldList(productFields);
 
-class Products extends React.Component {
+class TechProducts extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -31,19 +36,16 @@ class Products extends React.Component {
   async componentDidMount() {
     const products = await client.post(productQuery);
     this.setState({ data: products });
-    // console.log('state', this.state);
+    console.log('state', this.state);
     // console.log('data.product.name', this.data.product.name);
   }
   render() {
     const { data } = this.state;
-    const clothes = data.categories[1];
-    console.log('clothes :', clothes);
-    console.log('data :', data);
     // console.log('data.product.name :', data.product.name);
     return (
       <>
         YoYo
-        {data.categories.map((el) => (
+        {/* {data.categories.map((el) => (
           <div key={el.name}>
             {el.name}
             {el.products.map((el) => (
@@ -52,10 +54,10 @@ class Products extends React.Component {
               </div>
             ))}
           </div>
-        ))}
+        ))} */}
       </>
     );
   }
 }
 
-export default Products;
+export default TechProducts;
