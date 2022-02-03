@@ -1,19 +1,19 @@
 import React from 'react';
 import { client } from '@tilework/opus';
-import './tech-products.css';
-import techProductsQuery from './tech-products-query.js';
-import TECH_INITIAL_STATE from './tech-initial-state.js';
+import './clothes-products.css';
+import CLOTHES_INITIAL_STATE from './clothes-initial-state.js';
+import ClothesProductsQuery from './clothes-products-query.js';
 
 client.setEndpoint('http://localhost:4000/');
 
-class TechProducts extends React.Component {
+class ClothesProducts extends React.Component {
   constructor() {
     super();
-    this.state = TECH_INITIAL_STATE;
+    this.state = CLOTHES_INITIAL_STATE;
   }
 
   async componentDidMount() {
-    const products = await client.post(techProductsQuery);
+    const products = await client.post(ClothesProductsQuery);
     this.setState({ data: products });
     console.log('state', this.state);
   }
@@ -45,4 +45,4 @@ class TechProducts extends React.Component {
   }
 }
 
-export default TechProducts;
+export default ClothesProducts;
