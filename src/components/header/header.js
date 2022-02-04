@@ -13,17 +13,39 @@ import {
 class Header extends React.Component {
   render() {
     const currency = this.props.currency;
-    const setPound = this.props.setPound;
     const setDollar = this.props.setDollar;
+    const setPound = this.props.setPound;
+    const setAussieDollar = this.props.setAussieDollar;
+    const setYen = this.props.setYen;
+    const setRuble = this.props.setRuble;
+    const OPTIONS = ['USD', 'GBP', 'AUD', 'JPY', 'RUB'];
+
+    const handleChange = (event) =>
+      event.target.value === 'USD'
+        ? setDollar()
+        : event.target.value === 'GBP'
+        ? setPound()
+        : event.target.value === 'AUD'
+        ? setAussieDollar()
+        : event.target.value === 'JPY'
+        ? setYen()
+        : setRuble();
+
     return (
       <header>
         <nav className="navigation">
           <Link to="tech">Tech</Link>
           <Link to="clothes">Clothes</Link>
         </nav>
-        <aside>{currency}</aside>
-        <button onClick={setDollar}>Set Dollar</button>
-        <button onClick={setPound}>Set Pound</button>
+        <aside className="currency">
+          <select value={currency} onChange={handleChange}>
+            {OPTIONS.map((elem) => (
+              <option key={elem}>{elem}</option>
+            ))}
+          </select>
+        </aside>
+        {/* <button onClick={setDollar}>Set Dollar</button>
+        <button onClick={setPound}>Set Pound</button> */}
       </header>
     );
   }
