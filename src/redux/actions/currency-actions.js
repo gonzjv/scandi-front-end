@@ -1,6 +1,16 @@
-export const setEuro = () => {
+export const setDollar = () => {
   return {
-    type: 'SET_EURO',
+    type: 'SET_DOLLAR',
+  };
+};
+export const setPound = () => {
+  return {
+    type: 'SET_GBP',
+  };
+};
+export const setAussieDollar = () => {
+  return {
+    type: 'SET_AUD',
   };
 };
 export const setYen = () => {
@@ -8,8 +18,8 @@ export const setYen = () => {
     type: 'SET_YEN',
   };
 };
-export const setDollar = () => {
+export const setRuble = () => {
   return {
-    type: 'SET_DOLLAR',
+    type: 'SET_RUB',
   };
 };

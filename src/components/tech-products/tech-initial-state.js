@@ -6,7 +6,7 @@ const TECH_INITIAL_STATE = {
           name: 'loading...',
           prices: [
             {
-              currency: { label: 'loading...' },
+              currency: { label: 'USD' },
               amount: 'loading...',
             },
           ],
