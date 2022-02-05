@@ -1,29 +1,34 @@
 import React from 'react';
 import { client } from '@tilework/opus';
-import './tech-products.css';
-import techProductsQuery from './tech-products-query.js';
-import TECH_INITIAL_STATE from './tech-initial-state.js';
+import './products.css';
+import PRODUCTS_INITIAL_STATE from './initial-state.js';
+import GetProductsQuery from './products-query.js';
 import { connect } from 'react-redux';
 
 client.setEndpoint('http://localhost:4000/');
 
-class TechProducts extends React.Component {
+class Products extends React.Component {
   constructor() {
     super();
-    this.state = TECH_INITIAL_STATE;
+    this.state = PRODUCTS_INITIAL_STATE;
   }
 
   async componentDidMount() {
-    const products = await client.post(techProductsQuery);
+    const products = await client.post(
+      GetProductsQuery(this.props.category)
+    );
     this.setState({ data: products });
-    console.log('state', this.state);
   }
 
   render() {
     const { data } = this.state;
     const currency = this.props.currency;
+    const category = this.props.category;
+    console.log('data', data);
+
     return (
       <main className="product-list">
+        {category}
         {data.category.products.map((el) => (
           <div key={el.name} className="product">
             <figure>
@@ -55,7 +60,8 @@ class TechProducts extends React.Component {
 
 const mapStateToProps = (state) => {
   const currency = state.currency;
-  return { currency };
+  const category = state.category;
+  return { currency, category };
 };
 
-export default connect(mapStateToProps)(TechProducts);
+export default connect(mapStateToProps)(Products);

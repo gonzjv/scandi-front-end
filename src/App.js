@@ -1,20 +1,20 @@
 import './App.css';
 import React from 'react';
-import TechProducts from './components/tech-products/tech-products.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/layout/layout.js';
-import ClothesProducts from './components/clothes-products/clothes-products.js';
+import Products from './components/products/products.js';
+import { connect } from 'react-redux';
 
 class App extends React.Component {
   render() {
+    const category = this.props.category;
     return (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<TechProducts />} />
-            <Route path="tech" element={<TechProducts />} />
-            <Route path="clothes" element={<ClothesProducts />} />
-            {/* <TechProducts />; */}
+            {console.log('category:', category)}
+            <Route index element={<Products key={category} />} />
+            {/* <Route path="tech" element={<TechProducts />} /> */}
           </Route>
         </Routes>
       </BrowserRouter>
@@ -22,4 +22,9 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  const category = state.category;
+  return { category };
+};
+
+export default connect(mapStateToProps)(App);

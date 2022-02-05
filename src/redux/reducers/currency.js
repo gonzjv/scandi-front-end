@@ -1,17 +1,17 @@
-const INITIAL_STATE = { currency: 'USD' };
+const INITIAL_STATE = 'USD';
 
 const currency = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'SET_DOLLAR':
-      return { currency: 'USD' };
+      return 'USD';
     case 'SET_GBP':
-      return { currency: 'GBP' };
+      return 'GBP';
     case 'SET_AUD':
-      return { currency: 'AUD' };
+      return 'AUD';
     case 'SET_YEN':
-      return { currency: 'JPY' };
+      return 'JPY';
     case 'SET_RUB':
-      return { currency: 'RUB' };
+      return 'RUB';
     default:
       return state;
   }

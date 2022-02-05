@@ -4,11 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createStore } from 'redux';
-import currency from './redux/reducers/currency.js';
 import { Provider } from 'react-redux';
+import rootReducer from './redux/reducers/root-reducer.js';
 
 const store = createStore(
-  currency,
+  rootReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ &&
     window.__REDUX_DEVTOOLS_EXTENSION__()
 );
