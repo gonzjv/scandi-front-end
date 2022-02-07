@@ -18,6 +18,7 @@ class Products extends React.Component {
     const products = await client.post(
       GetProductsQuery(this.props.category)
     );
+    console.log('props.category', this.props.category);
     this.setState({ data: products });
   }
   handleNav = () => {
@@ -28,13 +29,11 @@ class Products extends React.Component {
     const { data } = this.state;
     const navigateToDesription = this.state.navigateToDesription;
     const currency = this.props.currency;
-    const category = this.props.category;
     console.log('data', data);
-    console.log('navi', this.state.navigateToDesription);
 
     return (
       <main className="product-list">
-        {category}
+        {this.props.category}
         {data.category.products.map((el) => (
           <div
             onClick={this.handleNav}
@@ -73,8 +72,7 @@ class Products extends React.Component {
 
 const mapStateToProps = (state) => {
   const currency = state.currency;
-  const category = state.category;
-  return { currency, category };
+  return { currency };
 };
 
 export default connect(mapStateToProps)(Products);
