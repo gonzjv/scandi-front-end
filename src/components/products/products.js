@@ -4,6 +4,7 @@ import './products.css';
 import PRODUCTS_INITIAL_STATE from './initial-state.js';
 import GetProductsQuery from './products-query.js';
 import { connect } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
 client.setEndpoint('http://localhost:4000/');
 
@@ -19,18 +20,30 @@ class Products extends React.Component {
     );
     this.setState({ data: products });
   }
+  handleNav = () => {
+    this.setState({ navigateToDesription: true });
+  };
 
   render() {
     const { data } = this.state;
+    const navigateToDesription = this.state.navigateToDesription;
     const currency = this.props.currency;
     const category = this.props.category;
     console.log('data', data);
+    console.log('navi', this.state.navigateToDesription);
 
     return (
       <main className="product-list">
         {category}
         {data.category.products.map((el) => (
-          <div key={el.name} className="product">
+          <div
+            onClick={this.handleNav}
+            key={el.name}
+            className="product"
+          >
+            {navigateToDesription && (
+              <Navigate to={`/description/${el.id}`} replace={true} />
+            )}
             <figure>
               <img
                 src={el.gallery[0]}

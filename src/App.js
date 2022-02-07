@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/layout/layout.js';
 import Products from './components/products/products.js';
 import { connect } from 'react-redux';
+import ProductDescription from './components/product-description/product-description.js';
 
 class App extends React.Component {
   render() {
@@ -12,9 +13,11 @@ class App extends React.Component {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            {console.log('category:', category)}
             <Route index element={<Products key={category} />} />
-            {/* <Route path="tech" element={<TechProducts />} /> */}
+            <Route
+              path="description/:id"
+              element={<ProductDescription />}
+            />
           </Route>
         </Routes>
       </BrowserRouter>

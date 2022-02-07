@@ -1,4 +1,5 @@
 const PRODUCTS_INITIAL_STATE = {
+  navigateToDesription: false,
   data: {
     category: {
       products: [
