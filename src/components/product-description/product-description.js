@@ -1,8 +1,9 @@
-import { client, Field, Query } from '@tilework/opus';
+import { client } from '@tilework/opus';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import getDescriptionQuery from './get-description-query.js';
 import DESCRIPTION_INITIAL_STATE from './initial-state.js';
+import './product-description.css';
 
 class ProductDescription extends React.Component {
   constructor() {
@@ -18,24 +19,46 @@ class ProductDescription extends React.Component {
 
   render() {
     const { data } = this.state;
+    const product = data.product;
     console.log('data:', data);
     return (
       <main className="description">
-        <p>Name: {data.product.name} </p>
-        <p>Brand: {data.product.brand} </p>
-        <p>Category: {data.product.category} </p>
+        <p>Name: {product.name} </p>
+        <p>Brand: {product.brand} </p>
+        <p>Category: {product.category} </p>
         <p>
           In stock:{' '}
-          {data.product.inStock ? <span>✅</span> : <span>❌</span>}
+          {product.inStock ? <span>✅</span> : <span>❌</span>}
         </p>
         <div>
-          {data.product.attributes.map((attribute) => (
-            <span>{attribute.name}</span>
+          {product.attributes.map((attribute) => (
+            <div className="attribute" key={attribute.name}>
+              {attribute.name} :
+              {attribute.items.map((item) => (
+                <span key={item.displayValue}>
+                  {item.displayValue}
+                </span>
+              ))}
+            </div>
           ))}
-          {/* {data.product.attributes.items.map((el) => (
-            <span>{el.displayValue}</span>
-          ))} */}
         </div>
+        <figure className="gallery">
+          <aside className="sidebar">
+            {product.gallery.map((url) => (
+              <img
+                key={url}
+                src={url}
+                className="sidebar-image"
+                alt={url}
+              ></img>
+            ))}
+          </aside>
+          <img
+            src={product.gallery[0]}
+            className="descr-image"
+            alt={product.name}
+          ></img>
+        </figure>
         <p
           dangerouslySetInnerHTML={{
             __html: data.product.description,

@@ -6,6 +6,7 @@ const DESCRIPTION_INITIAL_STATE = {
       category: '',
       inStock: false,
       brand: '',
+      gallery: [],
       attributes: [
         {
           name: '',

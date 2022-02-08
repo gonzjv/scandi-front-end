@@ -6,6 +6,7 @@ const fieldList = [
   'category',
   'inStock',
   'brand',
+  'gallery',
 ];
 
 const getDescriptionQuery = (id) =>
