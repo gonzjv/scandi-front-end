@@ -1,39 +1,33 @@
 import { client, Field, Query } from '@tilework/opus';
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import getDescriptionQuery from './get-description-query.js';
+import DESCRIPTION_INITIAL_STATE from './initial-state.js';
 
 class ProductDescription extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = DESCRIPTION_INITIAL_STATE;
   }
 
   async componentDidMount() {
-    const products = await client.post(
-      new Query('category', true)
-        .addArgument('input', 'CategoryInput', { title: 'tech' })
-        .addField(
-          new Field('products', true)
-            .addField(new Field('name'))
-            .addField(
-              new Field('prices', true)
-                .addField(
-                  new Field('currency').addField(new Field('label'))
-                )
-                .addField(new Field('amount'))
-            )
-            .addField(new Field('gallery'))
-        )
-    );
+    const id = this.props.params.id;
+    const products = await client.post(getDescriptionQuery(id));
     this.setState({ data: products });
   }
 
   render() {
+    const { data } = this.state;
+    console.log('data:', data);
     return (
-      <div>
-        I am description
-        {console.log('this.props', this.props)}
-      </div>
+      <main className="description">
+        <p>Name: {data.product.name} </p>
+        <p
+          dangerouslySetInnerHTML={{
+            __html: data.product.description,
+          }}
+        />
+      </main>
     );
   }
 }

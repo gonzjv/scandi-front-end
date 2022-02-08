@@ -21,28 +21,29 @@ class Products extends React.Component {
     console.log('props.category', this.props.category);
     this.setState({ data: products });
   }
-  handleNav = () => {
-    this.setState({ navigateToDesription: true });
-  };
+  handleNav(id) {
+    this.setState({ navigateToDesription: true, productId: id });
+  }
 
   render() {
     const { data } = this.state;
     const navigateToDesription = this.state.navigateToDesription;
+    const productId = this.state.productId;
     const currency = this.props.currency;
     console.log('data', data);
 
     return (
       <main className="product-list">
         {this.props.category}
+        {navigateToDesription && (
+          <Navigate to={`/description/${productId}`} replace={true} />
+        )}
         {data.category.products.map((el) => (
           <div
-            onClick={this.handleNav}
+            onClick={() => this.handleNav(el.id)}
             key={el.name}
             className="product"
           >
-            {navigateToDesription && (
-              <Navigate to={`/description/${el.id}`} replace={true} />
-            )}
             <figure>
               <img
                 src={el.gallery[0]}
