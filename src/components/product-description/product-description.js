@@ -22,6 +22,20 @@ class ProductDescription extends React.Component {
     return (
       <main className="description">
         <p>Name: {data.product.name} </p>
+        <p>Brand: {data.product.brand} </p>
+        <p>Category: {data.product.category} </p>
+        <p>
+          In stock:{' '}
+          {data.product.inStock ? <span>✅</span> : <span>❌</span>}
+        </p>
+        <div>
+          {data.product.attributes.map((attribute) => (
+            <span>{attribute.name}</span>
+          ))}
+          {/* {data.product.attributes.items.map((el) => (
+            <span>{el.displayValue}</span>
+          ))} */}
+        </div>
         <p
           dangerouslySetInnerHTML={{
             __html: data.product.description,

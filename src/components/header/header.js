@@ -32,7 +32,7 @@ class Header extends React.Component {
         : setRuble();
 
     return (
-      <header>
+      <header className="header">
         <nav className="navigation">
           <Link to="/tech">Tech</Link>
           <Link to="/clothes">Clothes</Link>

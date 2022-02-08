@@ -3,6 +3,19 @@ const DESCRIPTION_INITIAL_STATE = {
     product: {
       name: '',
       description: '',
+      category: '',
+      inStock: false,
+      brand: '',
+      attributes: [
+        {
+          name: '',
+          items: [
+            {
+              displayValue: '',
+            },
+          ],
+        },
+      ],
     },
   },
 };
