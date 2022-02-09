@@ -1,9 +1,11 @@
 import { client } from '@tilework/opus';
 import React from 'react';
+import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import getDescriptionQuery from './get-description-query.js';
 import DESCRIPTION_INITIAL_STATE from './initial-state.js';
 import './product-description.css';
+import { setMainImageUrl } from '../../redux/actions/main-image-actions.js';
 
 class ProductDescription extends React.Component {
   constructor() {
@@ -15,11 +17,15 @@ class ProductDescription extends React.Component {
     const id = this.props.params.id;
     const products = await client.post(getDescriptionQuery(id));
     this.setState({ data: products });
+
+    const initialImageUrl = this.state.data.product.gallery[0];
+    this.props.setMainImageUrl(initialImageUrl);
   }
 
   render() {
     const { data } = this.state;
     const product = data.product;
+    const setMainImageUrl = this.props.setMainImageUrl;
     console.log('data:', data);
     return (
       <main className="description">
@@ -50,11 +56,12 @@ class ProductDescription extends React.Component {
                 src={url}
                 className="sidebar-image"
                 alt={url}
+                onClick={() => setMainImageUrl(url)}
               ></img>
             ))}
           </aside>
           <img
-            src={product.gallery[0]}
+            src={this.props.imageUrl}
             className="descr-image"
             alt={product.name}
           ></img>
@@ -75,4 +82,16 @@ const withRouter = (WrappedComponent) => (props) => {
   return <WrappedComponent {...props} params={params} />;
 };
 
-export default withRouter(ProductDescription);
+const mapStateToProps = (state) => {
+  const imageUrl = state.mainImageUrl;
+  return { imageUrl };
+};
+
+const actionCreators = {
+  setMainImageUrl,
+};
+
+export default connect(
+  mapStateToProps,
+  actionCreators
+)(withRouter(ProductDescription));
