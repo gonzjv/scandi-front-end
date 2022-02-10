@@ -1,5 +1,20 @@
+.description {
+  display: flex;
+}
+.descr-left {
+  width: 60%;
+}
+.descr-right {
+  width: 30%;
+}
+.attributes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 .attribute {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
 }
 .gallery {

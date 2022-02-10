@@ -6,6 +6,7 @@ import getDescriptionQuery from './get-description-query.js';
 import DESCRIPTION_INITIAL_STATE from './initial-state.js';
 import './product-description.css';
 import { setMainImageUrl } from '../../redux/actions/main-image-actions.js';
+import { setAttribute } from '../../redux/actions/attributes.js';
 
 class ProductDescription extends React.Component {
   constructor() {
@@ -20,57 +21,79 @@ class ProductDescription extends React.Component {
 
     const initialImageUrl = this.state.data.product.gallery[0];
     this.props.setMainImageUrl(initialImageUrl);
+
+    const initialAttributes = this.state.data.product.attributes[0];
+    this.props.setAttribute(
+      initialAttributes.name,
+      initialAttributes.items[0].displayValue
+    );
   }
 
   render() {
     const { data } = this.state;
     const product = data.product;
     const setMainImageUrl = this.props.setMainImageUrl;
+    const setAttribute = this.props.setAttribute;
+    const attributes = this.props.attributes;
     console.log('data:', data);
     return (
       <main className="description">
-        <p>Name: {product.name} </p>
-        <p>Brand: {product.brand} </p>
-        <p>Category: {product.category} </p>
-        <p>
-          In stock:{' '}
-          {product.inStock ? <span>✅</span> : <span>❌</span>}
-        </p>
-        <div>
-          {product.attributes.map((attribute) => (
-            <div className="attribute" key={attribute.name}>
-              {attribute.name} :
-              {attribute.items.map((item) => (
-                <span key={item.displayValue}>
-                  {item.displayValue}
-                </span>
+        <section className="descr-left">
+          <figure className="gallery">
+            <aside className="sidebar">
+              {product.gallery.map((url) => (
+                <img
+                  key={url}
+                  src={url}
+                  className="sidebar-image"
+                  alt={url}
+                  onClick={() => setMainImageUrl(url)}
+                ></img>
               ))}
-            </div>
-          ))}
-        </div>
-        <figure className="gallery">
-          <aside className="sidebar">
-            {product.gallery.map((url) => (
-              <img
-                key={url}
-                src={url}
-                className="sidebar-image"
-                alt={url}
-                onClick={() => setMainImageUrl(url)}
-              ></img>
+            </aside>
+            <img
+              src={this.props.imageUrl}
+              className="descr-image"
+              alt={product.name}
+            ></img>
+          </figure>
+        </section>
+        <section className="descr-right">
+          <p>Name: {product.name} </p>
+          <p>Brand: {product.brand} </p>
+          <p>Category: {product.category} </p>
+          <p>
+            In stock:
+            {product.inStock ? <span>✅</span> : <span>❌</span>}
+          </p>
+          <div className="attributes">
+            {product.attributes.map((attribute) => (
+              <div className="attribute" key={attribute.name}>
+                {attribute.name} :
+                {attribute.items.map((item) => (
+                  <button
+                    className={
+                      item.displayValue === attributes[attribute.name]
+                        ? 'chosen_attribute'
+                        : ''
+                    }
+                    key={item.displayValue}
+                    onClick={() =>
+                      setAttribute(attribute.name, item.displayValue)
+                    }
+                  >
+                    {item.displayValue}
+                  </button>
+                ))}
+              </div>
             ))}
-          </aside>
-          <img
-            src={this.props.imageUrl}
-            className="descr-image"
-            alt={product.name}
-          ></img>
-        </figure>
-        <p
-          dangerouslySetInnerHTML={{
-            __html: data.product.description,
-          }}
-        />
+          </div>
+          <p
+            dangerouslySetInnerHTML={{
+              __html: data.product.description,
+            }}
+          />
+        </section>
       </main>
     );
   }
@@ -84,11 +107,13 @@ const withRouter = (WrappedComponent) => (props) => {
 
 const mapStateToProps = (state) => {
   const imageUrl = state.mainImageUrl;
-  return { imageUrl };
+  const attributes = state.attributes;
+  return { imageUrl, attributes };
 };
 
 const actionCreators = {
   setMainImageUrl,
+  setAttribute,
 };
 
 export default connect(
