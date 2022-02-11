@@ -37,12 +37,13 @@ class Header extends React.Component {
           <Link to="/tech">Tech</Link>
           <Link to="/clothes">Clothes</Link>
         </nav>
-        <aside className="currency">
+        <aside className="">
           <select value={currency} onChange={handleCurrencyChange}>
             {OPTIONS.map((elem) => (
               <option key={elem}>{elem}</option>
             ))}
           </select>
+          <Link to="/cart">🛒</Link>
         </aside>
       </header>
     );

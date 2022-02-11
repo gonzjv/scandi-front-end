@@ -1,4 +1,3 @@
-// const INITIAL_STATE = [{ name: '', items: [{ displayValue: '' }] }];
 const INITIAL_STATE = {};
 
 const attributes = (state = INITIAL_STATE, action) => {

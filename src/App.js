@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/layout/layout.js';
 import Products from './components/products/products.js';
 import ProductDescription from './components/product-description/product-description.js';
+import Cart from './components/cart/cart.js';
 
 class App extends React.Component {
   render() {
@@ -26,6 +27,7 @@ class App extends React.Component {
               path="description/:id"
               element={<ProductDescription />}
             />
+            <Route path="cart" element={<Cart />} />
           </Route>
         </Routes>
       </BrowserRouter>
