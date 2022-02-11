@@ -4,6 +4,7 @@ import './products.css';
 import PRODUCTS_INITIAL_STATE from './initial-state.js';
 import GetProductsQuery from './products-query.js';
 import { connect } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
 client.setEndpoint('http://localhost:4000/');
 
@@ -17,20 +18,32 @@ class Products extends React.Component {
     const products = await client.post(
       GetProductsQuery(this.props.category)
     );
+    console.log('props.category', this.props.category);
     this.setState({ data: products });
+  }
+  handleNav(id) {
+    this.setState({ navigateToDesription: true, productId: id });
   }
 
   render() {
     const { data } = this.state;
+    const navigateToDesription = this.state.navigateToDesription;
+    const productId = this.state.productId;
     const currency = this.props.currency;
-    const category = this.props.category;
     console.log('data', data);
 
     return (
       <main className="product-list">
-        {category}
+        {this.props.category}
+        {navigateToDesription && (
+          <Navigate to={`/description/${productId}`} replace={true} />
+        )}
         {data.category.products.map((el) => (
-          <div key={el.name} className="product">
+          <div
+            onClick={() => this.handleNav(el.id)}
+            key={el.name}
+            className="product"
+          >
             <figure>
               <img
                 src={el.gallery[0]}
@@ -60,8 +73,7 @@ class Products extends React.Component {
 
 const mapStateToProps = (state) => {
   const currency = state.currency;
-  const category = state.category;
-  return { currency, category };
+  return { currency };
 };
 
 export default connect(mapStateToProps)(Products);

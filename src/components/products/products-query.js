@@ -6,6 +6,7 @@ const GetProductsQuery = (category) =>
     .addField(
       new Field('products', true)
         .addField(new Field('name'))
+        .addField(new Field('id'))
         .addField(
           new Field('prices', true)
             .addField(

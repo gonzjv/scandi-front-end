@@ -8,10 +8,7 @@ import {
   setYen,
   setRuble,
 } from '../../redux/actions/currency-actions.js';
-import {
-  setCategoryTech,
-  setCategoryClothes,
-} from '../../redux/actions/category-actions.js';
+import { Link } from 'react-router-dom';
 
 class Header extends React.Component {
   render() {
@@ -21,8 +18,6 @@ class Header extends React.Component {
     const setAussieDollar = this.props.setAussieDollar;
     const setYen = this.props.setYen;
     const setRuble = this.props.setRuble;
-    const setTech = this.props.setCategoryTech;
-    const setClothes = this.props.setCategoryClothes;
     const OPTIONS = ['USD', 'GBP', 'AUD', 'JPY', 'RUB'];
 
     const handleCurrencyChange = (event) =>
@@ -37,12 +32,10 @@ class Header extends React.Component {
         : setRuble();
 
     return (
-      <header>
+      <header className="header">
         <nav className="navigation">
-          {/* <Link to="tech">Tech</Link>
-          <Link to="clothes">Clothes</Link> */}
-          <button onClick={setTech}>Tech</button>
-          <button onClick={setClothes}>Clothes</button>
+          <Link to="/tech">Tech</Link>
+          <Link to="/clothes">Clothes</Link>
         </nav>
         <aside className="currency">
           <select value={currency} onChange={handleCurrencyChange}>
@@ -51,8 +44,6 @@ class Header extends React.Component {
             ))}
           </select>
         </aside>
-        {/* <button onClick={setDollar}>Set Dollar</button>
-        <button onClick={setPound}>Set Pound</button> */}
       </header>
     );
   }
@@ -69,8 +60,6 @@ const actionCreators = {
   setAussieDollar,
   setYen,
   setRuble,
-  setCategoryTech,
-  setCategoryClothes,
 };
 
 export default connect(mapStateToProps, actionCreators)(Header);
