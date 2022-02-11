@@ -19,14 +19,14 @@ class ProductDescription extends React.Component {
     const products = await client.post(getDescriptionQuery(id));
     this.setState({ data: products });
 
-    const initialImageUrl = this.state.data.product.gallery[0];
+    const product = this.state.data.product;
+    const initialImageUrl = product.gallery[0];
     this.props.setMainImageUrl(initialImageUrl);
 
-    const initialAttributes = this.state.data.product.attributes[0];
-    this.props.setAttribute(
-      initialAttributes.name,
-      initialAttributes.items[0].displayValue
+    product.attributes.map((elem) =>
+      this.props.setAttribute(elem.name, elem.items[0].displayValue)
     );
+    // const initialAttributes = this.state.data.product.attributes[0];
   }
 
   render() {
@@ -35,7 +35,10 @@ class ProductDescription extends React.Component {
     const setMainImageUrl = this.props.setMainImageUrl;
     const setAttribute = this.props.setAttribute;
     const attributes = this.props.attributes;
+    const currency = this.props.currency;
+
     console.log('data:', data);
+
     return (
       <main className="description">
         <section className="descr-left">
@@ -74,7 +77,7 @@ class ProductDescription extends React.Component {
                   <button
                     className={
                       item.displayValue === attributes[attribute.name]
-                        ? 'chosen_attribute'
+                        ? 'chosen-attribute'
                         : ''
                     }
                     key={item.displayValue}
@@ -88,6 +91,19 @@ class ProductDescription extends React.Component {
               </div>
             ))}
           </div>
+          <div className="price">
+            <p>
+              {Math.round(
+                Number(
+                  product.prices.find(
+                    (el) => el.currency.label === currency
+                  ).amount
+                )
+              ).toString()}
+            </p>
+            <p>{currency}</p>
+          </div>
+
           <p
             dangerouslySetInnerHTML={{
               __html: data.product.description,
@@ -108,7 +124,8 @@ const withRouter = (WrappedComponent) => (props) => {
 const mapStateToProps = (state) => {
   const imageUrl = state.mainImageUrl;
   const attributes = state.attributes;
-  return { imageUrl, attributes };
+  const currency = state.currency;
+  return { imageUrl, attributes, currency };
 };
 
 const actionCreators = {

@@ -17,6 +17,9 @@
   flex-wrap: wrap;
   gap: 10px;
 }
+.chosen-attribute {
+  background-color: lightgreen;
+}
 .gallery {
   width: 100%;
   display: flex;

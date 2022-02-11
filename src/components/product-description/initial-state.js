@@ -17,6 +17,14 @@ const DESCRIPTION_INITIAL_STATE = {
           ],
         },
       ],
+      prices: [
+        {
+          currency: {
+            label: 'USD',
+          },
+          amount: 'loading...',
+        },
+      ],
     },
   },
 };

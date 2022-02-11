@@ -19,6 +19,11 @@ const getDescriptionQuery = (id) =>
         .addField(
           new Field('items', true).addField(new Field('displayValue'))
         )
+    )
+    .addField(
+      new Field('prices', true)
+        .addField(new Field('currency').addField(new Field('label')))
+        .addField(new Field('amount'))
     );
 
 export default getDescriptionQuery;
