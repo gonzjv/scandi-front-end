@@ -103,7 +103,9 @@ class ProductDescription extends React.Component {
             </p>
             <p>{currency}</p>
           </div>
-
+          <button className="add-to-cart">
+            {'add to cart'.toUpperCase()}
+          </button>
           <p
             dangerouslySetInnerHTML={{
               __html: data.product.description,
