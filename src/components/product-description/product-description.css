@@ -7,7 +7,7 @@
 .descr-right {
   width: 30%;
 }
-.attributes {
+.descr-right .attributes {
   display: flex;
   flex-direction: column;
   gap: 10px;

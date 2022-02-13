@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import './cart.css';
 
 class Cart extends React.Component {
   render() {
@@ -9,12 +10,11 @@ class Cart extends React.Component {
     return (
       <main>
         <h2>Cart</h2>
-        <ul>
+        <ul className="cart-product-list">
           {cart.map((product) => (
-            <li>
+            <li key={Math.random()}>
               <p>{product.name}</p>
               <p>
-                {' '}
                 {Math.round(
                   Number(
                     product.prices.find(
@@ -24,6 +24,14 @@ class Cart extends React.Component {
                 ).toString()}
                 {currency}
               </p>
+              <ul className="attributes">
+                {Object.keys(product.attributes).map((key) => (
+                  <li className="element" key={key}>
+                    <p>{key}</p>
+                    <p>{product.attributes[key]}</p>
+                  </li>
+                ))}
+              </ul>
             </li>
           ))}
         </ul>

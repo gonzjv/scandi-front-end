@@ -1,0 +1,16 @@
+.cart-product-list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.cart-product-list .attributes {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+.cart-product-list .attributes .element {
+  display: flex;
+  gap: 10px;
+}
