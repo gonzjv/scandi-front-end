@@ -107,7 +107,12 @@ class ProductDescription extends React.Component {
           </div>
           <button
             onClick={() =>
-              addToCart(product.name, product.gallery[0])
+              addToCart(
+                product.name,
+                product.gallery[0],
+                product.prices,
+                attributes
+              )
             }
             className="add-to-cart"
           >

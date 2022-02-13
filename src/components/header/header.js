@@ -37,7 +37,7 @@ class Header extends React.Component {
           <Link to="/tech">Tech</Link>
           <Link to="/clothes">Clothes</Link>
         </nav>
-        <aside className="">
+        <aside className="header-left-side">
           <select value={currency} onChange={handleCurrencyChange}>
             {OPTIONS.map((elem) => (
               <option key={elem}>{elem}</option>
