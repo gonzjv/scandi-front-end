@@ -14,3 +14,7 @@ export const addToCart = (name, imageUrl, prices, attributes) => {
 export const increaseQuantity = (id) => {
   return { type: 'INCREASE_QUANTITY', payload: { id: id } };
 };
+
+export const decreaseQuantity = (id) => {
+  return { type: 'DECREASE_QUANTITY', payload: { id: id } };
+};

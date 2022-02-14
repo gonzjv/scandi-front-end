@@ -17,15 +17,23 @@ const cart = (state = INITIAL_STATE, action) => {
           id: uuidv4(),
         },
       ];
+
     case 'INCREASE_QUANTITY':
-      const { id } = action.payload;
-      console.log('id', id);
       return state.map((item) => {
-        if (item.id === id) {
+        if (item.id === action.payload.id) {
           return { ...item, quantity: item.quantity + 1 };
         }
         return item;
       });
+
+    case 'DECREASE_QUANTITY':
+      return state.map((item) => {
+        if (item.id === action.payload.id && item.quantity > 0) {
+          return { ...item, quantity: item.quantity - 1 };
+        }
+        return item;
+      });
+
     default:
       return state;
   }

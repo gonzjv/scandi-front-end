@@ -1,7 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import './cart.css';
-import { increaseQuantity } from '../../redux/actions/cart-actions.js';
+import {
+  increaseQuantity,
+  decreaseQuantity,
+} from '../../redux/actions/cart-actions.js';
 
 class Cart extends React.Component {
   render() {
@@ -45,7 +48,13 @@ class Cart extends React.Component {
                     +
                   </button>
                   {product.quantity}
-                  <button>-</button>
+                  <button
+                    onClick={() =>
+                      this.props.decreaseQuantity(product.id)
+                    }
+                  >
+                    -
+                  </button>
                 </figcaption>
                 <img
                   src={product.imageUrl}
@@ -69,6 +78,7 @@ const mapStateToProps = (state) => {
 
 const actionCreators = {
   increaseQuantity,
+  decreaseQuantity,
 };
 
 export default connect(mapStateToProps, actionCreators)(Cart);
