@@ -6,6 +6,11 @@ export const addToCart = (name, imageUrl, prices, attributes) => {
       imageUrl: imageUrl,
       prices: prices,
       attributes: attributes,
+      quantity: 1,
     },
   };
+};
+
+export const increaseQuantity = (id) => {
+  return { type: 'INCREASE_QUANTITY', payload: { id: id } };
 };

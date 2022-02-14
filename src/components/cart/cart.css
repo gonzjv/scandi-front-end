@@ -5,6 +5,25 @@
   margin: 0;
   padding: 0;
 }
+.cart-product-list .product {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.cart-product-list .image {
+  width: 100px;
+}
+.cart-product-list figure {
+  display: flex;
+  gap: 10px;
+  margin: 0;
+}
+.quantity {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .cart-product-list .attributes {
   display: flex;
   flex-direction: column;
