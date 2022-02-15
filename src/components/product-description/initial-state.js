@@ -20,7 +20,7 @@ const DESCRIPTION_INITIAL_STATE = {
       prices: [
         {
           currency: {
-            label: 'USD',
+            symbol: '$',
           },
           amount: 'loading...',
         },

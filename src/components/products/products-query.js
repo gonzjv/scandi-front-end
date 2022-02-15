@@ -10,7 +10,9 @@ const GetProductsQuery = (category) =>
         .addField(
           new Field('prices', true)
             .addField(
-              new Field('currency').addField(new Field('label'))
+              new Field('currency')
+                .addField(new Field('label'))
+                .addField(new Field('symbol'))
             )
             .addField(new Field('amount'))
         )

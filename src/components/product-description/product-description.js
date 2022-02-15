@@ -44,7 +44,6 @@ class ProductDescription extends React.Component {
     const currency = this.props.currency;
 
     console.log('data:', data);
-    console.log('attr when render', this.props.attributes);
 
     return (
       <main className="description">
@@ -103,7 +102,7 @@ class ProductDescription extends React.Component {
               {Math.round(
                 Number(
                   product.prices.find(
-                    (el) => el.currency.label === currency
+                    (el) => el.currency.symbol === currency
                   ).amount
                 )
               ).toString()}

@@ -25,7 +25,7 @@ class Cart extends React.Component {
                     {Math.round(
                       Number(
                         product.prices.find(
-                          (el) => el.currency.label === currency
+                          (el) => el.currency.symbol === currency
                         ).amount
                       )
                     ).toString()}

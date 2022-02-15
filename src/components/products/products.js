@@ -57,7 +57,7 @@ class Products extends React.Component {
                 {Math.round(
                   Number(
                     el.prices.find(
-                      (el) => el.currency.label === currency
+                      (el) => el.currency.symbol === currency
                     ).amount
                   )
                 ).toString()}

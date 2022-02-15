@@ -7,23 +7,23 @@ const PRODUCTS_INITIAL_STATE = {
           name: 'loading...',
           prices: [
             {
-              currency: { label: 'USD' },
+              currency: { symbol: '$' },
               amount: 'loading...',
             },
             {
-              currency: { label: 'GBP' },
+              currency: { symbol: '£' },
               amount: 'loading...',
             },
             {
-              currency: { label: 'AUD' },
+              currency: { symbol: 'A$' },
               amount: 'loading...',
             },
             {
-              currency: { label: 'JPY' },
+              currency: { symbol: '¥' },
               amount: 'loading...',
             },
             {
-              currency: { label: 'RUB' },
+              currency: { symbol: '₽' },
               amount: 'loading...',
             },
           ],
