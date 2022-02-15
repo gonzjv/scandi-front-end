@@ -5,6 +5,7 @@ import {
   increaseQuantity,
   decreaseQuantity,
 } from '../../redux/actions/cart-actions.js';
+import { v4 as uuidv4 } from 'uuid';
 
 class Cart extends React.Component {
   render() {
@@ -16,18 +17,20 @@ class Cart extends React.Component {
         <h2>Cart</h2>
         <ul className="cart-product-list">
           {cart.map((product) => (
-            <li key={Math.random()} className="product">
-              <div>
+            <li key={uuidv4()} className="product">
+              <div className="left-side">
                 <p>{product.name}</p>
-                <p>
-                  {Math.round(
-                    Number(
-                      product.prices.find(
-                        (el) => el.currency.label === currency
-                      ).amount
-                    )
-                  ).toString()}
-                  {currency}
+                <p className="price">
+                  <strong>
+                    {Math.round(
+                      Number(
+                        product.prices.find(
+                          (el) => el.currency.label === currency
+                        ).amount
+                      )
+                    ).toString()}
+                  </strong>
+                  <strong>{currency}</strong>
                 </p>
                 <ul className="attributes">
                   {Object.keys(product.attributes).map((key) => (

@@ -6,7 +6,10 @@ import getDescriptionQuery from './get-description-query.js';
 import DESCRIPTION_INITIAL_STATE from './initial-state.js';
 import './product-description.css';
 import { setMainImageUrl } from '../../redux/actions/main-image-actions.js';
-import { setAttribute } from '../../redux/actions/attributes.js';
+import {
+  setAttribute,
+  clearAttributes,
+} from '../../redux/actions/attributes.js';
 import { addToCart } from '../../redux/actions/cart-actions.js';
 
 class ProductDescription extends React.Component {
@@ -24,10 +27,11 @@ class ProductDescription extends React.Component {
     const initialImageUrl = product.gallery[0];
     this.props.setMainImageUrl(initialImageUrl);
 
+    this.props.clearAttributes();
+
     product.attributes.map((elem) =>
       this.props.setAttribute(elem.name, elem.items[0].displayValue)
     );
-    // const initialAttributes = this.state.data.product.attributes[0];
   }
 
   render() {
@@ -40,6 +44,7 @@ class ProductDescription extends React.Component {
     const currency = this.props.currency;
 
     console.log('data:', data);
+    console.log('attr when render', this.props.attributes);
 
     return (
       <main className="description">
@@ -146,6 +151,7 @@ const actionCreators = {
   setMainImageUrl,
   setAttribute,
   addToCart,
+  clearAttributes,
 };
 
 export default connect(

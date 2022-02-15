@@ -9,9 +9,23 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+  border-top: 2px solid #e5e5e5;
+  padding-top: 1%;
+  margin-bottom: 2%;
+}
+.cart-product-list .product .price {
+  display: flex;
+  gap: 5px;
+}
+.cart-product-list .product .left-side {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 .cart-product-list .image {
   width: 100px;
+  /* height: 100%; */
+  object-fit: contain;
 }
 .cart-product-list figure {
   display: flex;
@@ -28,6 +42,7 @@
   display: flex;
   flex-direction: column;
   list-style: none;
+  padding: 0;
 }
 .cart-product-list .attributes .element {
   display: flex;
