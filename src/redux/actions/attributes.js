@@ -4,3 +4,9 @@ export const setAttribute = (name, value) => {
     payload: { name: name, value: value },
   };
 };
+
+export const clearAttributes = () => {
+  return {
+    type: 'CLEAR_ATTRIBUTES',
+  };
+};

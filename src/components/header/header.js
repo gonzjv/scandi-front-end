@@ -18,16 +18,16 @@ class Header extends React.Component {
     const setAussieDollar = this.props.setAussieDollar;
     const setYen = this.props.setYen;
     const setRuble = this.props.setRuble;
-    const OPTIONS = ['USD', 'GBP', 'AUD', 'JPY', 'RUB'];
+    const OPTIONS = ['$', '£', 'A$', '¥', '₽'];
 
     const handleCurrencyChange = (event) =>
-      event.target.value === 'USD'
+      event.target.value === '$'
         ? setDollar()
-        : event.target.value === 'GBP'
+        : event.target.value === '£'
         ? setPound()
-        : event.target.value === 'AUD'
+        : event.target.value === 'A$'
         ? setAussieDollar()
-        : event.target.value === 'JPY'
+        : event.target.value === '¥'
         ? setYen()
         : setRuble();
 
@@ -37,12 +37,13 @@ class Header extends React.Component {
           <Link to="/tech">Tech</Link>
           <Link to="/clothes">Clothes</Link>
         </nav>
-        <aside className="currency">
+        <aside className="header-left-side">
           <select value={currency} onChange={handleCurrencyChange}>
             {OPTIONS.map((elem) => (
               <option key={elem}>{elem}</option>
             ))}
           </select>
+          <Link to="/cart">🛒</Link>
         </aside>
       </header>
     );

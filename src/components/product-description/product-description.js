@@ -6,7 +6,11 @@ import getDescriptionQuery from './get-description-query.js';
 import DESCRIPTION_INITIAL_STATE from './initial-state.js';
 import './product-description.css';
 import { setMainImageUrl } from '../../redux/actions/main-image-actions.js';
-import { setAttribute } from '../../redux/actions/attributes.js';
+import {
+  setAttribute,
+  clearAttributes,
+} from '../../redux/actions/attributes.js';
+import { addToCart } from '../../redux/actions/cart-actions.js';
 
 class ProductDescription extends React.Component {
   constructor() {
@@ -23,10 +27,11 @@ class ProductDescription extends React.Component {
     const initialImageUrl = product.gallery[0];
     this.props.setMainImageUrl(initialImageUrl);
 
+    this.props.clearAttributes();
+
     product.attributes.map((elem) =>
       this.props.setAttribute(elem.name, elem.items[0].displayValue)
     );
-    // const initialAttributes = this.state.data.product.attributes[0];
   }
 
   render() {
@@ -34,6 +39,7 @@ class ProductDescription extends React.Component {
     const product = data.product;
     const setMainImageUrl = this.props.setMainImageUrl;
     const setAttribute = this.props.setAttribute;
+    const addToCart = this.props.addToCart;
     const attributes = this.props.attributes;
     const currency = this.props.currency;
 
@@ -96,14 +102,24 @@ class ProductDescription extends React.Component {
               {Math.round(
                 Number(
                   product.prices.find(
-                    (el) => el.currency.label === currency
+                    (el) => el.currency.symbol === currency
                   ).amount
                 )
               ).toString()}
             </p>
             <p>{currency}</p>
           </div>
-          <button className="add-to-cart">
+          <button
+            onClick={() =>
+              addToCart(
+                product.name,
+                product.gallery[0],
+                product.prices,
+                attributes
+              )
+            }
+            className="add-to-cart"
+          >
             {'add to cart'.toUpperCase()}
           </button>
           <p
@@ -133,6 +149,8 @@ const mapStateToProps = (state) => {
 const actionCreators = {
   setMainImageUrl,
   setAttribute,
+  addToCart,
+  clearAttributes,
 };
 
 export default connect(

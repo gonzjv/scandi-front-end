@@ -10,7 +10,7 @@
   width: 30%;
 }
 
-.image {
+.product .image {
   width: 100%;
   /* object-fit: contain; */
 }
