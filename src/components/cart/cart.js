@@ -20,6 +20,14 @@ class Cart extends React.Component {
             <li key={uuidv4()} className="product">
               <div className="left-side">
                 <p>{product.name}</p>
+                <ul className="attributes">
+                  {Object.keys(product.attributes).map((key) => (
+                    <li className="element" key={key}>
+                      <p className="name">{key}:</p>
+                      <p>{product.attributes[key]}</p>
+                    </li>
+                  ))}
+                </ul>
                 <p className="price">
                   <strong>
                     {Math.round(
@@ -32,18 +40,11 @@ class Cart extends React.Component {
                   </strong>
                   <strong>{currency}</strong>
                 </p>
-                <ul className="attributes">
-                  {Object.keys(product.attributes).map((key) => (
-                    <li className="element" key={key}>
-                      <p>{key}</p>
-                      <p>{product.attributes[key]}</p>
-                    </li>
-                  ))}
-                </ul>
               </div>
               <figure>
                 <figcaption className="quantity">
                   <button
+                    className="plus-minus-btn"
                     onClick={() =>
                       this.props.increaseQuantity(product.id)
                     }
@@ -52,6 +53,7 @@ class Cart extends React.Component {
                   </button>
                   {product.quantity}
                   <button
+                    className="plus-minus-btn"
                     onClick={() =>
                       this.props.decreaseQuantity(product.id)
                     }

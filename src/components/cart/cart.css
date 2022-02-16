@@ -23,8 +23,7 @@
   gap: 5px;
 }
 .cart-product-list .image {
-  width: 100px;
-  /* height: 100%; */
+  width: 150px;
   object-fit: contain;
 }
 .cart-product-list figure {
@@ -35,7 +34,7 @@
 .quantity {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 .cart-product-list .attributes {
@@ -47,4 +46,17 @@
 .cart-product-list .attributes .element {
   display: flex;
   gap: 10px;
+}
+.cart-product-list .attributes .element .name {
+  font-weight: 200;
+}
+.plus-minus-btn {
+  width: 45px;
+  height: 45px;
+  background: none;
+  border: solid 2px #e5e5e5;
+  font-size: x-large;
+}
+.plus-minus-btn:active {
+  background: #e5e5e5;
 }
