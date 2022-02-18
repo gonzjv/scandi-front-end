@@ -1,0 +1,13 @@
+.cart-overlay {
+  position: fixed;
+  z-index: 100;
+  width: 325px;
+  height: 540px;
+  top: 50px;
+  right: 90px;
+
+  background-color: white;
+
+  display: flex;
+  flex-direction: column;
+}
