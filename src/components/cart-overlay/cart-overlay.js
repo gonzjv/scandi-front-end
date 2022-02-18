@@ -34,21 +34,23 @@ class CartOverlay extends React.Component {
           <h4>My Bag,</h4>
           <p>{cart.itemsInCart} items</p>
         </header>
-        <ul className="cart-product-list">
+        <ul className="overlay-product-list">
           {cart.items.map((product) => (
             <li key={uuidv4()} className="product">
               <div className="left-side">
-                <p>{product.name}</p>
+                <p className="name">{product.name}</p>
                 <ul className="attributes">
                   {Object.keys(product.attributes).map((key) => (
                     <li className="element" key={key}>
                       <p className="name">{key}:</p>
-                      <p>{product.attributes[key]}</p>
+                      <em className="value">
+                        {product.attributes[key]}
+                      </em>
                     </li>
                   ))}
                 </ul>
-                <p className="price">
-                  <strong>
+                <div className="price">
+                  <p>
                     {Math.round(
                       Number(
                         product.prices.find(
@@ -56,9 +58,9 @@ class CartOverlay extends React.Component {
                         ).amount
                       )
                     ).toString()}
-                  </strong>
-                  <strong>{currency}</strong>
-                </p>
+                  </p>
+                  <p>{currency}</p>
+                </div>
               </div>
               <figure>
                 <figcaption className="quantity">
@@ -82,13 +84,23 @@ class CartOverlay extends React.Component {
                 </figcaption>
                 <img
                   src={product.imageUrl}
-                  className="image"
+                  className="cart-overlay-image"
                   alt={product.name}
                 ></img>
               </figure>
             </li>
           ))}
         </ul>
+        <footer className="overlay-footer">
+          <div className="total">
+            <p>Total</p>
+            <p></p>
+          </div>
+          <div className="buttons">
+            <button className="bag"> VIEW BAG</button>
+            <button className="check-out">CHECK OUT</button>
+          </div>
+        </footer>
       </aside>
     );
   }

@@ -5,6 +5,7 @@
   height: 540px;
   top: 50px;
   right: 90px;
+  overflow: scroll;
 
   background-color: white;
 
@@ -17,4 +18,82 @@
   align-items: center;
   gap: 5px;
   margin-left: 5%;
+}
+
+.cart-overlay-image {
+  width: 100px;
+  object-fit: contain;
+}
+
+.overlay-product-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.overlay-product-list .product {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  border-top: 2px solid #e5e5e5;
+  padding-top: 1%;
+  margin-bottom: 2%;
+}
+.overlay-product-list .product .price {
+  display: flex;
+  gap: 5px;
+}
+.overlay-product-list .product .left-side {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-left: 5%;
+}
+.overlay-product-list .image {
+  width: 150px;
+  object-fit: contain;
+}
+.overlay-product-list figure {
+  display: flex;
+  gap: 10px;
+  margin: 0;
+}
+
+.overlay-product-list .product .name {
+  font-weight: 200;
+}
+
+.overlay-product-list .attributes {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+}
+.overlay-product-list .attributes .element {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.overlay-product-list .attributes .value {
+  font-weight: 300;
+}
+
+.overlay-product-list .attributes .element .name {
+  font-weight: 200;
+}
+
+.overlay-product-list .plus-minus-btn {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: none;
+  border: solid 2px #e5e5e5;
+  font-size: large;
 }
