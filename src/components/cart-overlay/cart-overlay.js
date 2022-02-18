@@ -16,7 +16,6 @@ class CartOverlay extends React.Component {
 
   componentDidMount() {
     this.targetElem = document.querySelector('#cart-overlay');
-    console.log('targetElem', this.targetElem);
     disableBodyScroll(this.targetElem);
   }
 
@@ -31,10 +30,12 @@ class CartOverlay extends React.Component {
 
     return (
       <aside className="cart-overlay" id="cart-overlay">
-        cart overlay is here!
-        <h2>Cart</h2>
+        <header className="cart-overlay-header">
+          <h4>My Bag,</h4>
+          <p>{cart.itemsInCart} items</p>
+        </header>
         <ul className="cart-product-list">
-          {cart.map((product) => (
+          {cart.items.map((product) => (
             <li key={uuidv4()} className="product">
               <div className="left-side">
                 <p>{product.name}</p>

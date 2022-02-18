@@ -11,3 +11,10 @@
   display: flex;
   flex-direction: column;
 }
+
+.cart-overlay-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 5%;
+}
