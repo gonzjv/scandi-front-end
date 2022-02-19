@@ -94,10 +94,18 @@ class CartOverlay extends React.Component {
         <footer className="overlay-footer">
           <div className="total">
             <p>Total</p>
-            <p></p>
+            <p>
+              {Math.round(
+                Number(
+                  cart.total.find(
+                    (el) => el.currency.symbol === currency
+                  ).amount
+                )
+              ).toString()}
+            </p>
           </div>
           <div className="buttons">
-            <button className="bag"> VIEW BAG</button>
+            <button className="view-bag"> VIEW BAG</button>
             <button className="check-out">CHECK OUT</button>
           </div>
         </footer>
