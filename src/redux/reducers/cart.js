@@ -66,6 +66,19 @@ const cart = (state = INITIAL_STATE, action) => {
           }
           return item;
         }),
+        total: state.total.map((el) => {
+          return {
+            ...el,
+            amount:
+              el.amount +
+              state.items
+                .find((item) => item.id === action.payload.id)
+                .prices.find(
+                  (price) =>
+                    price.currency.symbol === el.currency.symbol
+                ).amount,
+          };
+        }),
       };
 
     case 'DECREASE_QUANTITY':
@@ -76,6 +89,19 @@ const cart = (state = INITIAL_STATE, action) => {
             return { ...item, quantity: item.quantity - 1 };
           }
           return item;
+        }),
+        total: state.total.map((el) => {
+          return {
+            ...el,
+            amount:
+              el.amount -
+              state.items
+                .find((item) => item.id === action.payload.id)
+                .prices.find(
+                  (price) =>
+                    price.currency.symbol === el.currency.symbol
+                ).amount,
+          };
         }),
       };
 
