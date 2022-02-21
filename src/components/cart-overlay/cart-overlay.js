@@ -26,6 +26,14 @@ class CartOverlay extends React.Component {
   render() {
     const cart = this.props.cart;
     const currency = this.props.currency;
+    const total = Math.round(
+      Number(
+        cart.total.find((el) => el.currency.symbol === currency)
+          .amount
+      )
+    ).toString();
+
+    console.log('total:', total);
     console.log('cart:', cart);
 
     return (
@@ -74,6 +82,7 @@ class CartOverlay extends React.Component {
                   </button>
                   {product.quantity}
                   <button
+                    disabled={product.quantity > 0 ? false : true}
                     className="plus-minus-btn"
                     onClick={() =>
                       this.props.decreaseQuantity(product.id)
@@ -95,13 +104,14 @@ class CartOverlay extends React.Component {
           <div className="total">
             <p>Total</p>
             <p>
-              {Math.round(
+              {total}
+              {/* {Math.round(
                 Number(
                   cart.total.find(
                     (el) => el.currency.symbol === currency
                   ).amount
                 )
-              ).toString()}
+              ).toString()} */}
             </p>
           </div>
           <div className="buttons">
