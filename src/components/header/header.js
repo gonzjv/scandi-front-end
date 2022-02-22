@@ -9,8 +9,26 @@ import {
   setRuble,
 } from '../../redux/actions/currency-actions.js';
 import { Link } from 'react-router-dom';
+import CartOverlay from '../cart-overlay/cart-overlay.js';
+import {
+  setMiniCartVisible,
+  unsetMiniCartVisible,
+} from '../../redux/actions/layout-actions.js';
 
 class Header extends React.Component {
+  constructor() {
+    super();
+    this.state = { isMiniCartVisible: false };
+  }
+
+  handleCartButton() {
+    this.props.setMiniCartVisible();
+  }
+
+  handleHideMiniCart() {
+    this.props.unsetMiniCartVisible();
+  }
+
   render() {
     const currency = this.props.currency;
     const setDollar = this.props.setDollar;
@@ -18,6 +36,7 @@ class Header extends React.Component {
     const setAussieDollar = this.props.setAussieDollar;
     const setYen = this.props.setYen;
     const setRuble = this.props.setRuble;
+    const isMiniCartVisible = this.props.isMiniCartVisible;
     const OPTIONS = ['$', '£', 'A$', '¥', '₽'];
 
     const handleCurrencyChange = (event) =>
@@ -43,8 +62,26 @@ class Header extends React.Component {
               <option key={elem}>{elem}</option>
             ))}
           </select>
-          <Link to="/cart">🛒</Link>
+          {/* <Link to="/cart">🛒</Link> */}
+          <button onClick={() => this.handleCartButton()}>🛒</button>
         </aside>
+        {isMiniCartVisible ? (
+          <>
+            <div
+              className="cover"
+              onClick={() => {
+                // this.props.unsetMiniCartVisible();
+                this.handleHideMiniCart();
+              }}
+            >
+              <div className="top"></div>
+              <div className="bottom"></div>
+            </div>
+            <CartOverlay />
+          </>
+        ) : (
+          ''
+        )}
       </header>
     );
   }
@@ -52,8 +89,8 @@ class Header extends React.Component {
 
 const mapStateToProps = (state) => {
   const currency = state.currency;
-
-  return { currency };
+  const { isMiniCartVisible } = state.layout;
+  return { currency, isMiniCartVisible };
 };
 const actionCreators = {
   setDollar,
@@ -61,6 +98,8 @@ const actionCreators = {
   setAussieDollar,
   setYen,
   setRuble,
+  setMiniCartVisible,
+  unsetMiniCartVisible,
 };
 
 export default connect(mapStateToProps, actionCreators)(Header);
