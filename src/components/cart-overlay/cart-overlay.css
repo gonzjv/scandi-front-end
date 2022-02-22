@@ -5,19 +5,30 @@
   height: 540px;
   top: 50px;
   right: 90px;
-  overflow: scroll;
+  overflow: auto;
 
   background-color: white;
 
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.cart-overlay .container {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
 }
 
 .cart-overlay-header {
+  width: 90%;
   display: flex;
+  justify-content: flex-start;
   align-items: center;
   gap: 5px;
-  margin-left: 5%;
 }
 
 .cart-overlay-image {
@@ -38,9 +49,9 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  border-top: 2px solid #e5e5e5;
-  padding-top: 1%;
-  margin-bottom: 2%;
+  /* border-top: 2px solid #e5e5e5; */
+  /* padding-top: 1%; */
+  margin-bottom: 10%;
 }
 .overlay-product-list .product .price {
   display: flex;
@@ -96,4 +107,49 @@
   background: none;
   border: solid 2px #e5e5e5;
   font-size: large;
+}
+
+.overlay-footer {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 5%;
+}
+
+.overlay-footer .total {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.overlay-footer .buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.overlay-footer .view-bag {
+  width: 40%;
+  height: 40px;
+
+  background-color: white;
+  border: 1px solid black;
+}
+.overlay-footer .view-bag:active {
+  width: 40%;
+  height: 40px;
+
+  color: white;
+  background-color: #5ece7b;
+  border: 1px solid black;
+  transition: 300ms;
+}
+
+.overlay-footer .check-out {
+  width: 40%;
+  height: 40px;
+
+  color: white;
+  background-color: #5ece7b;
+  border: 1px solid #5ece7b;
 }

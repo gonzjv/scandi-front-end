@@ -42,77 +42,73 @@ class CartOverlay extends React.Component {
           <h4>My Bag,</h4>
           <p>{cart.itemsInCart} items</p>
         </header>
-        <ul className="overlay-product-list">
-          {cart.items.map((product) => (
-            <li key={uuidv4()} className="product">
-              <div className="left-side">
-                <p className="name">{product.name}</p>
-                <ul className="attributes">
-                  {Object.keys(product.attributes).map((key) => (
-                    <li className="element" key={key}>
-                      <p className="name">{key}:</p>
-                      <em className="value">
-                        {product.attributes[key]}
-                      </em>
-                    </li>
-                  ))}
-                </ul>
-                <div className="price">
-                  <p>
-                    {Math.round(
-                      Number(
-                        product.prices.find(
-                          (el) => el.currency.symbol === currency
-                        ).amount
-                      )
-                    ).toString()}
-                  </p>
-                  <p>{currency}</p>
+        <div className="container">
+          <ul className="overlay-product-list">
+            {cart.items.map((product) => (
+              <li key={uuidv4()} className="product">
+                <div className="left-side">
+                  <p className="name">{product.name}</p>
+                  <ul className="attributes">
+                    {Object.keys(product.attributes).map((key) => (
+                      <li className="element" key={key}>
+                        <p className="name">{key}:</p>
+                        <em className="value">
+                          {product.attributes[key]}
+                        </em>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="price">
+                    <p>
+                      {Math.round(
+                        Number(
+                          product.prices.find(
+                            (el) => el.currency.symbol === currency
+                          ).amount
+                        )
+                      ).toString()}
+                    </p>
+                    <p>{currency}</p>
+                  </div>
                 </div>
-              </div>
-              <figure>
-                <figcaption className="quantity">
-                  <button
-                    className="plus-minus-btn"
-                    onClick={() =>
-                      this.props.increaseQuantity(product.id)
-                    }
-                  >
-                    +
-                  </button>
-                  {product.quantity}
-                  <button
-                    disabled={product.quantity > 0 ? false : true}
-                    className="plus-minus-btn"
-                    onClick={() =>
-                      this.props.decreaseQuantity(product.id)
-                    }
-                  >
-                    -
-                  </button>
-                </figcaption>
-                <img
-                  src={product.imageUrl}
-                  className="cart-overlay-image"
-                  alt={product.name}
-                ></img>
-              </figure>
-            </li>
-          ))}
-        </ul>
+                <figure>
+                  <figcaption className="quantity">
+                    <button
+                      className="plus-minus-btn"
+                      onClick={() =>
+                        this.props.increaseQuantity(product.id)
+                      }
+                    >
+                      +
+                    </button>
+                    {product.quantity}
+                    <button
+                      disabled={product.quantity > 0 ? false : true}
+                      className="plus-minus-btn"
+                      onClick={() =>
+                        this.props.decreaseQuantity(product.id)
+                      }
+                    >
+                      -
+                    </button>
+                  </figcaption>
+                  <img
+                    src={product.imageUrl}
+                    className="cart-overlay-image"
+                    alt={product.name}
+                  ></img>
+                </figure>
+              </li>
+            ))}
+          </ul>
+        </div>
         <footer className="overlay-footer">
           <div className="total">
-            <p>Total</p>
-            <p>
+            <h4>Total</h4>
+            <h4>
               {total}
-              {/* {Math.round(
-                Number(
-                  cart.total.find(
-                    (el) => el.currency.symbol === currency
-                  ).amount
-                )
-              ).toString()} */}
-            </p>
+              {currency}
+            </h4>
           </div>
           <div className="buttons">
             <button className="view-bag"> VIEW BAG</button>
