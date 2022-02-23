@@ -1,4 +1,5 @@
 .header {
+  height: 80px;
   display: flex;
   justify-content: space-between;
 }
@@ -6,6 +7,29 @@
   display: flex;
   gap: 10px;
   justify-content: flex-start;
+}
+
+.nav-btn {
+  height: 100%;
+  width: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+  color: #1d1f22;
+  border-bottom: 2px #1d1f22 solid;
+}
+.nav-btn-active {
+  height: 100%;
+  width: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+  color: #5ece7b;
+  border-bottom: 2px #5ece7b solid;
 }
 .header-left-side {
   display: flex;
@@ -22,7 +46,7 @@
 }
 
 .cover .top {
-  height: 50px;
+  height: 80px;
   background-color: transparent;
 }
 .cover .bottom {

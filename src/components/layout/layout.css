@@ -4,4 +4,6 @@
   flex-direction: column;
   justify-content: center;
   gap: 10px;
+
+  font-family: 'Raleway', sans-serif;
 }

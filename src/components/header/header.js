@@ -8,7 +8,7 @@ import {
   setYen,
   setRuble,
 } from '../../redux/actions/currency-actions.js';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import CartOverlay from '../cart-overlay/cart-overlay.js';
 import {
   setMiniCartVisible,
@@ -53,8 +53,22 @@ class Header extends React.Component {
     return (
       <header className="header">
         <nav className="navigation">
-          <Link to="/tech">Tech</Link>
-          <Link to="/clothes">Clothes</Link>
+          <NavLink
+            to="/tech"
+            className={({ isActive }) =>
+              isActive ? 'nav-btn-active' : 'nav-btn'
+            }
+          >
+            Tech
+          </NavLink>
+          <NavLink
+            to="/clothes"
+            className={({ isActive }) =>
+              isActive ? 'nav-btn-active' : 'nav-btn'
+            }
+          >
+            Clothes
+          </NavLink>
         </nav>
         <aside className="header-left-side">
           <select value={currency} onChange={handleCurrencyChange}>
