@@ -14,6 +14,7 @@ import {
   setMiniCartVisible,
   unsetMiniCartVisible,
 } from '../../redux/actions/layout-actions.js';
+import { ReactComponent as CartImgSvg } from '../../assets/img/cart.svg';
 
 class Header extends React.Component {
   constructor() {
@@ -71,20 +72,27 @@ class Header extends React.Component {
           </NavLink>
         </nav>
         <aside className="header-left-side">
-          <select value={currency} onChange={handleCurrencyChange}>
+          <select
+            className="currency-switch"
+            value={currency}
+            onChange={handleCurrencyChange}
+          >
             {OPTIONS.map((elem) => (
               <option key={elem}>{elem}</option>
             ))}
           </select>
-          {/* <Link to="/cart">🛒</Link> */}
-          <button onClick={() => this.handleCartButton()}>🛒</button>
+          <button
+            className="cart-btn"
+            onClick={() => this.handleCartButton()}
+          >
+            <CartImgSvg />
+          </button>
         </aside>
         {isMiniCartVisible ? (
           <>
             <div
               className="cover"
               onClick={() => {
-                // this.props.unsetMiniCartVisible();
                 this.handleHideMiniCart();
               }}
             >

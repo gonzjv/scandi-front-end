@@ -34,6 +34,24 @@
 .header-left-side {
   display: flex;
   gap: 10px;
+  align-items: center;
+}
+
+.currency-switch {
+  font-size: large;
+  background-color: white;
+  border: none;
+}
+
+.cart-btn {
+  margin-top: 8%;
+  background-color: white;
+  border: none;
+}
+
+.cart-img {
+  min-height: 20px;
+  min-width: 20px;
 }
 
 .cover {
