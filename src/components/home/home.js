@@ -1,5 +1,6 @@
 import React from 'react';
 import Products from '../products/products.js';
+import './home.css';
 
 class Home extends React.Component {
   render() {

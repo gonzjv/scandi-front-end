@@ -37,32 +37,32 @@ class Products extends React.Component {
           <Navigate to={`/description/${productId}`} replace={true} />
         )}
         {data.category.products.map((el) => (
-          <div
+          <figure
             onClick={() => this.handleNav(el.id)}
             key={el.name}
             className="product"
           >
-            <figure>
-              <img
-                src={el.gallery[0]}
-                className="image"
-                alt={el.name}
-              ></img>
-            </figure>
-            <p>{el.name}</p>
-            <div className="price">
-              <p>
-                {Math.round(
-                  Number(
-                    el.prices.find(
-                      (el) => el.currency.symbol === currency
-                    ).amount
-                  )
-                ).toString()}
-              </p>
-              <p>{currency}</p>
-            </div>
-          </div>
+            <img
+              src={el.gallery[0]}
+              className="image"
+              alt={el.name}
+            ></img>
+            <figcaption className="description">
+              <p>{el.name}</p>
+              <div className="price">
+                <p>
+                  {Math.round(
+                    Number(
+                      el.prices.find(
+                        (el) => el.currency.symbol === currency
+                      ).amount
+                    )
+                  ).toString()}
+                </p>
+                <p>{currency}</p>
+              </div>
+            </figcaption>
+          </figure>
         ))}
       </section>
     );
