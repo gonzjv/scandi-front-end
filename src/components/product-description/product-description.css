@@ -1,5 +1,7 @@
 .description {
   display: flex;
+  gap: 50px;
+  margin-top: 10%;
 }
 .descr-left {
   width: 60%;
@@ -23,18 +25,20 @@
 .gallery {
   width: 100%;
   display: flex;
+  gap: 50px;
   margin: 0;
 }
 .sidebar {
   display: flex;
-  width: 30%;
+  width: 20%;
   flex-direction: column;
-  gap: 10px;
+  gap: 30px;
 }
 .sidebar-image {
-  width: 150px;
+  width: 100%;
 }
 
 .descr-image {
-  width: 70%;
+  width: 100%;
+  object-fit: contain;
 }
