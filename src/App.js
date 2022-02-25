@@ -5,6 +5,7 @@ import Layout from './components/layout/layout.js';
 import Products from './components/products/products.js';
 import ProductDescription from './components/product-description/product-description.js';
 import Cart from './components/cart/cart.js';
+import Home from './components/home/home.js';
 
 class App extends React.Component {
   render() {
@@ -12,7 +13,7 @@ class App extends React.Component {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Products category="tech" />} />
+            <Route index element={<Home />} />
             <Route
               path="tech"
               element={<Products category="tech" key={'tech'} />}

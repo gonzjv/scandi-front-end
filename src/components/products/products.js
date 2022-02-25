@@ -18,7 +18,6 @@ class Products extends React.Component {
     const products = await client.post(
       GetProductsQuery(this.props.category)
     );
-    console.log('props.category', this.props.category);
     this.setState({ data: products });
   }
   handleNav(id) {
@@ -33,8 +32,7 @@ class Products extends React.Component {
     console.log('data', data);
 
     return (
-      <main className="product-list">
-        {this.props.category}
+      <section className="product-list">
         {navigateToDesription && (
           <Navigate to={`/description/${productId}`} replace={true} />
         )}
@@ -66,7 +64,7 @@ class Products extends React.Component {
             </div>
           </div>
         ))}
-      </main>
+      </section>
     );
   }
 }

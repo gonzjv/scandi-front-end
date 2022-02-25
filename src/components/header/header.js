@@ -55,6 +55,14 @@ class Header extends React.Component {
       <header className="header">
         <nav className="navigation">
           <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive ? 'nav-btn-active' : 'nav-btn'
+            }
+          >
+            Home
+          </NavLink>
+          <NavLink
             to="/tech"
             className={({ isActive }) =>
               isActive ? 'nav-btn-active' : 'nav-btn'
