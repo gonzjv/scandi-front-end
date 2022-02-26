@@ -2,6 +2,7 @@
   height: 80px;
   display: flex;
   justify-content: space-between;
+  color: #1d1f22;
 }
 .navigation {
   display: flex;

@@ -7,6 +7,7 @@
 }
 
 .product {
+  position: relative;
   width: 30%;
   margin: 0;
 
@@ -14,6 +15,23 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.out-of-stoke {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  color: #8d8f9a;
+  opacity: 0.5;
+}
+
+.hidden {
+  display: none;
 }
 
 .product .description {

@@ -46,7 +46,7 @@ class ProductDescription extends React.Component {
     console.log('data:', data);
 
     return (
-      <main className="description">
+      <main className="item-description">
         <section className="descr-left">
           <figure className="gallery">
             <aside className="sidebar">
