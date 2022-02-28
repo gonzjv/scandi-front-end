@@ -18,6 +18,7 @@
   justify-content: center;
 
   text-decoration: none;
+  text-transform: capitalize;
   color: #1d1f22;
   border-bottom: 2px #1d1f22 solid;
 }
@@ -29,6 +30,7 @@
   justify-content: center;
 
   text-decoration: none;
+  text-transform: capitalize;
   color: #5ece7b;
   border-bottom: 2px #5ece7b solid;
 }

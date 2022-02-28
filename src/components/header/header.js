@@ -39,6 +39,7 @@ class Header extends React.Component {
     const setRuble = this.props.setRuble;
     const isMiniCartVisible = this.props.isMiniCartVisible;
     const OPTIONS = ['$', '£', 'A$', '¥', '₽'];
+    const categories = ['all', 'tech', 'clothes'];
 
     const handleCurrencyChange = (event) =>
       event.target.value === '$'
@@ -62,22 +63,17 @@ class Header extends React.Component {
           >
             Home
           </NavLink>
-          <NavLink
-            to="/tech"
-            className={({ isActive }) =>
-              isActive ? 'nav-btn-active' : 'nav-btn'
-            }
-          >
-            Tech
-          </NavLink>
-          <NavLink
-            to="/clothes"
-            className={({ isActive }) =>
-              isActive ? 'nav-btn-active' : 'nav-btn'
-            }
-          >
-            Clothes
-          </NavLink>
+          {categories.map((category) => (
+            <NavLink
+              to={category}
+              key={category}
+              className={({ isActive }) =>
+                isActive ? 'nav-btn-active' : 'nav-btn'
+              }
+            >
+              {category}
+            </NavLink>
+          ))}
         </nav>
         <aside className="header-left-side">
           <select
