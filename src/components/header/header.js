@@ -39,7 +39,7 @@ class Header extends React.Component {
     const setRuble = this.props.setRuble;
     const isMiniCartVisible = this.props.isMiniCartVisible;
     const OPTIONS = ['$', '£', 'A$', '¥', '₽'];
-    const categories = ['all', 'tech', 'clothes'];
+    const categories = this.props.categories;
 
     const handleCurrencyChange = (event) =>
       event.target.value === '$'
@@ -65,13 +65,13 @@ class Header extends React.Component {
           </NavLink>
           {categories.map((category) => (
             <NavLink
-              to={category}
-              key={category}
+              to={category.name}
+              key={category.name}
               className={({ isActive }) =>
                 isActive ? 'nav-btn-active' : 'nav-btn'
               }
             >
-              {category}
+              {category.name}
             </NavLink>
           ))}
         </nav>
@@ -116,7 +116,8 @@ class Header extends React.Component {
 const mapStateToProps = (state) => {
   const currency = state.currency;
   const { isMiniCartVisible } = state.layout;
-  return { currency, isMiniCartVisible };
+  const categories = state.categories;
+  return { currency, isMiniCartVisible, categories };
 };
 const actionCreators = {
   setDollar,
