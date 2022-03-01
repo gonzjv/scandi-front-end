@@ -88,7 +88,7 @@ class ProductDescription extends React.Component {
                         item.displayValue ===
                         attributes[attribute.name]
                           ? 'chosen-attribute'
-                          : ''
+                          : 'attribute-btn'
                       }
                       key={item.displayValue}
                       onClick={() =>
@@ -107,7 +107,8 @@ class ProductDescription extends React.Component {
           </div>
           <div className="price">
             <strong>Price:</strong>
-            <p>
+            <p className="price-value">
+              {currency}
               {Math.round(
                 Number(
                   product.prices.find(
@@ -116,9 +117,15 @@ class ProductDescription extends React.Component {
                 )
               ).toString()}
             </p>
-            <p>{currency}</p>
+            {product.inStock ? (
+              ''
+            ) : (
+              <p className="price-out-of-stock">OUT OF STOCK</p>
+            )}
           </div>
+          {console.log('inStock', product.inStock)}
           <button
+            disabled={product.inStock ? false : true}
             onClick={() =>
               addToCart(
                 product.name,

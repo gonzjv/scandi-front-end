@@ -62,8 +62,8 @@ class Products extends React.Component {
                 <p>{currency}</p>
               </div>
             </figcaption>
-            <div className={el.inStock ? 'hidden' : 'out-of-stoke'}>
-              OUT OF STORE
+            <div className={el.inStock ? 'hidden' : 'out-of-stock'}>
+              OUT OF STOCK
             </div>
           </figure>
         ))}
