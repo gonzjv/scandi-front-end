@@ -68,36 +68,45 @@ class ProductDescription extends React.Component {
           </figure>
         </section>
         <section className="descr-right">
-          <p>Name: {product.name} </p>
-          <p>Brand: {product.brand} </p>
-          <p>Category: {product.category} </p>
-          <p>
+          <div className="top">
+            <strong>{product.name} </strong>
+            <p>{product.brand} </p>
+          </div>
+          {/* <p>Category: {product.category} </p> */}
+          {/* <p>
             In stock:
             {product.inStock ? <span>✅</span> : <span>❌</span>}
-          </p>
+          </p> */}
           <div className="attributes">
             {product.attributes.map((attribute) => (
               <div className="attribute" key={attribute.name}>
-                {attribute.name} :
-                {attribute.items.map((item) => (
-                  <button
-                    className={
-                      item.displayValue === attributes[attribute.name]
-                        ? 'chosen-attribute'
-                        : ''
-                    }
-                    key={item.displayValue}
-                    onClick={() =>
-                      setAttribute(attribute.name, item.displayValue)
-                    }
-                  >
-                    {item.displayValue}
-                  </button>
-                ))}
+                <strong>{attribute.name}:</strong>
+                <div className="values">
+                  {attribute.items.map((item) => (
+                    <button
+                      className={
+                        item.displayValue ===
+                        attributes[attribute.name]
+                          ? 'chosen-attribute'
+                          : ''
+                      }
+                      key={item.displayValue}
+                      onClick={() =>
+                        setAttribute(
+                          attribute.name,
+                          item.displayValue
+                        )
+                      }
+                    >
+                      {item.displayValue}
+                    </button>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
           <div className="price">
+            <strong>Price:</strong>
             <p>
               {Math.round(
                 Number(
