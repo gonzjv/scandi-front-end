@@ -40,6 +40,7 @@ class Header extends React.Component {
     const isMiniCartVisible = this.props.isMiniCartVisible;
     const OPTIONS = ['$', '£', 'A$', '¥', '₽'];
     const categories = this.props.categories;
+    const cart = this.props.cart;
 
     const handleCurrencyChange = (event) =>
       event.target.value === '$'
@@ -75,7 +76,7 @@ class Header extends React.Component {
             </NavLink>
           ))}
         </nav>
-        <aside className="header-left-side">
+        <aside className="header-right-side">
           <select
             className="currency-switch"
             value={currency}
@@ -90,6 +91,11 @@ class Header extends React.Component {
             onClick={() => this.handleCartButton()}
           >
             <CartImgSvg />
+            {cart.itemsInCart > 0 ? (
+              <div className="items-in-cart">{cart.itemsInCart}</div>
+            ) : (
+              ''
+            )}
           </button>
         </aside>
         {isMiniCartVisible ? (
@@ -117,7 +123,8 @@ const mapStateToProps = (state) => {
   const currency = state.currency;
   const { isMiniCartVisible } = state.layout;
   const categories = state.categories;
-  return { currency, isMiniCartVisible, categories };
+  const cart = state.cart;
+  return { currency, isMiniCartVisible, categories, cart };
 };
 const actionCreators = {
   setDollar,

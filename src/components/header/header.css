@@ -34,7 +34,7 @@
   color: #5ece7b;
   border-bottom: 2px #5ece7b solid;
 }
-.header-left-side {
+.header-right-side {
   display: flex;
   gap: 10px;
   align-items: center;
@@ -47,9 +47,22 @@
 }
 
 .cart-btn {
+  position: relative;
   margin-top: 8%;
   background-color: white;
   border: none;
+}
+
+.cart-btn .items-in-cart {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: 20px;
+  top: -10px;
+  color: white;
+
+  background-color: #1d1f22;
+  border-radius: 60px;
 }
 
 .cart-img {
