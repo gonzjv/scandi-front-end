@@ -10,6 +10,7 @@ import {
   disableBodyScroll,
   enableBodyScroll,
 } from 'body-scroll-lock';
+import { NavLink } from 'react-router-dom';
 
 class CartOverlay extends React.Component {
   targetElem = null;
@@ -33,7 +34,6 @@ class CartOverlay extends React.Component {
       )
     ).toString();
 
-    console.log('total:', total);
     console.log('cart:', cart);
 
     return (
@@ -47,7 +47,7 @@ class CartOverlay extends React.Component {
             {cart.items.map((product) => (
               <li key={uuidv4()} className="product">
                 <div className="left-side">
-                  <p className="name">{product.name}</p>
+                  <strong className="name">{product.name}</strong>
                   <ul className="attributes">
                     {Object.keys(product.attributes).map((key) => (
                       <li className="element" key={key}>
@@ -104,14 +104,17 @@ class CartOverlay extends React.Component {
         </div>
         <footer className="overlay-footer">
           <div className="total">
-            <h4>Total</h4>
-            <h4>
+            <strong>Total</strong>
+            <strong>
               {total}
               {currency}
-            </h4>
+            </strong>
           </div>
           <div className="buttons">
-            <button className="view-bag"> VIEW BAG</button>
+            <NavLink className="view-bag" to="cart">
+              VIEW BAG
+            </NavLink>
+            {/* <button className="view-bag"> VIEW BAG</button> */}
             <button className="check-out">CHECK OUT</button>
           </div>
         </footer>

@@ -6,8 +6,13 @@ import {
   decreaseQuantity,
 } from '../../redux/actions/cart-actions.js';
 import { v4 as uuidv4 } from 'uuid';
+import { unsetMiniCartVisible } from '../../redux/actions/layout-actions.js';
 
 class Cart extends React.Component {
+  componentDidMount() {
+    this.props.unsetMiniCartVisible();
+  }
+
   render() {
     const cart = this.props.cart;
     const currency = this.props.currency;
@@ -16,7 +21,7 @@ class Cart extends React.Component {
       <main>
         <h2>Cart</h2>
         <ul className="cart-product-list">
-          {cart.map((product) => (
+          {cart.items.map((product) => (
             <li key={uuidv4()} className="product">
               <div className="left-side">
                 <p>{product.name}</p>
@@ -84,6 +89,7 @@ const mapStateToProps = (state) => {
 const actionCreators = {
   increaseQuantity,
   decreaseQuantity,
+  unsetMiniCartVisible,
 };
 
 export default connect(mapStateToProps, actionCreators)(Cart);
