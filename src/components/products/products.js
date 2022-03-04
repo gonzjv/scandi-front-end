@@ -49,7 +49,7 @@ class Products extends React.Component {
             ></img>
             <figcaption className="description">
               <p>{el.name}</p>
-              <div className="price">
+              <strong className="price">
                 <p>
                   {Math.round(
                     Number(
@@ -60,7 +60,7 @@ class Products extends React.Component {
                   ).toString()}
                 </p>
                 <p>{currency}</p>
-              </div>
+              </strong>
             </figcaption>
             <div className={el.inStock ? 'hidden' : 'out-of-stock'}>
               OUT OF STOCK

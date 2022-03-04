@@ -1,17 +1,30 @@
+.cart {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.cart .total {
+  display: flex;
+
+  gap: 10px;
+}
+
 .cart-product-list {
   display: flex;
   flex-direction: column;
   list-style: none;
   margin: 0;
   padding: 0;
+  border-top: 2px solid #e5e5e5;
 }
 .cart-product-list .product {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  border-top: 2px solid #e5e5e5;
-  padding-top: 1%;
-  margin-bottom: 2%;
+  border-bottom: 2px solid #e5e5e5;
+  padding-top: 3%;
+  padding-bottom: 3%;
 }
 .cart-product-list .product .price {
   display: flex;
@@ -20,7 +33,7 @@
 .cart-product-list .product .left-side {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 20px;
 }
 .cart-product-list .image {
   width: 150px;
@@ -42,13 +55,12 @@
   flex-direction: column;
   list-style: none;
   padding: 0;
+  gap: 10px;
 }
 .cart-product-list .attributes .element {
   display: flex;
   gap: 10px;
-}
-.cart-product-list .attributes .element .name {
-  font-weight: 200;
+  font-weight: 100;
 }
 .cart-product-list .plus-minus-btn {
   width: 45px;

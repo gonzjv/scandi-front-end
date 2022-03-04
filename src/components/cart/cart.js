@@ -16,15 +16,23 @@ class Cart extends React.Component {
   render() {
     const cart = this.props.cart;
     const currency = this.props.currency;
+    const total = Math.round(
+      Number(
+        cart.total.find((el) => el.currency.symbol === currency)
+          .amount
+      )
+    ).toString();
+
     console.log('cart:', cart);
+
     return (
-      <main>
+      <main className="cart">
         <h2>Cart</h2>
         <ul className="cart-product-list">
           {cart.items.map((product) => (
             <li key={uuidv4()} className="product">
               <div className="left-side">
-                <p>{product.name}</p>
+                <strong>{product.name}</strong>
                 <ul className="attributes">
                   {Object.keys(product.attributes).map((key) => (
                     <li className="element" key={key}>
@@ -75,6 +83,14 @@ class Cart extends React.Component {
             </li>
           ))}
         </ul>
+        <div className="total">
+          <strong>Total:</strong>
+          <strong>
+            {currency}
+            {total}
+          </strong>
+        </div>
+        <button className="check-out">CHECK OUT</button>
       </main>
     );
   }

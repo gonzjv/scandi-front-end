@@ -41,7 +41,7 @@
   align-items: flex-start;
 }
 
-.product .image {
+.product-list .product .image {
   width: 100%;
   height: 250px;
   object-fit: contain;

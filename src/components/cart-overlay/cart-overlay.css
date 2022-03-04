@@ -156,8 +156,8 @@
   transition: 200ms;
 }
 
-.overlay-footer .check-out {
-  width: 40%;
+.check-out {
+  width: 120px;
   height: 40px;
 
   color: white;
@@ -166,8 +166,8 @@
   transition: 200ms;
 }
 
-.overlay-footer .check-out:active {
-  width: 40%;
+.check-out:active {
+  width: 120px;
   height: 40px;
 
   color: #5ece7b;
