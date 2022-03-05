@@ -41,6 +41,7 @@
 }
 
 .currency-switch {
+  text-align: end;
   font-size: large;
   background-color: white;
   border: none;
