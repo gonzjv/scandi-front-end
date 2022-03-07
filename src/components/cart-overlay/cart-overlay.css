@@ -51,10 +51,7 @@
 .overlay-product-list .product {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
   width: 100%;
-  /* border-top: 2px solid #e5e5e5; */
-  /* padding-top: 1%; */
   margin-bottom: 10%;
 }
 .overlay-product-list .product .price {
@@ -68,6 +65,31 @@
   gap: 5px;
   margin-left: 5%;
 }
+
+.overlay-product-list .product .right-side {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.product .right-side .delete {
+  height: fit-content;
+  border: none;
+  background-color: white;
+  font-weight: 100;
+  color: #8d8f9a;
+  text-decoration: underline dashed;
+}
+
+.product .right-side .delete:hover {
+  height: fit-content;
+  border: none;
+  background-color: white;
+  font-weight: 100;
+  color: lightcoral;
+  text-decoration: underline dashed;
+}
+
 .overlay-product-list .image {
   width: 150px;
   object-fit: contain;

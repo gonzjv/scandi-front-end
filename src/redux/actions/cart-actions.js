@@ -11,6 +11,17 @@ export const addToCart = (name, imageUrl, prices, attributes) => {
   };
 };
 
+export const deleteFromCart = (itemId, itemPrices, itemQuantity) => {
+  return {
+    type: 'DELETE_FROM_CART',
+    payload: {
+      itemId: itemId,
+      itemPrices: itemPrices,
+      itemQuantity: itemQuantity,
+    },
+  };
+};
+
 export const increaseQuantity = (id) => {
   return { type: 'INCREASE_QUANTITY', payload: { id: id } };
 };

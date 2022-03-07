@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {
   increaseQuantity,
   decreaseQuantity,
+  deleteFromCart,
 } from '../../redux/actions/cart-actions.js';
 import './cart-overlay.css';
 import { v4 as uuidv4 } from 'uuid';
@@ -71,33 +72,47 @@ class CartOverlay extends React.Component {
                     <p>{currency}</p>
                   </div>
                 </div>
-                <figure>
-                  <figcaption className="quantity">
-                    <button
-                      className="plus-minus-btn"
-                      onClick={() =>
-                        this.props.increaseQuantity(product.id)
-                      }
-                    >
-                      +
-                    </button>
-                    {product.quantity}
-                    <button
-                      disabled={product.quantity > 0 ? false : true}
-                      className="plus-minus-btn"
-                      onClick={() =>
-                        this.props.decreaseQuantity(product.id)
-                      }
-                    >
-                      -
-                    </button>
-                  </figcaption>
-                  <img
-                    src={product.imageUrl}
-                    className="cart-overlay-image"
-                    alt={product.name}
-                  ></img>
-                </figure>
+                <div className="right-side">
+                  <button
+                    className="delete"
+                    onClick={() =>
+                      this.props.deleteFromCart(
+                        product.id,
+                        product.prices,
+                        product.quantity
+                      )
+                    }
+                  >
+                    delete
+                  </button>
+                  <figure>
+                    <figcaption className="quantity">
+                      <button
+                        className="plus-minus-btn"
+                        onClick={() =>
+                          this.props.increaseQuantity(product.id)
+                        }
+                      >
+                        +
+                      </button>
+                      {product.quantity}
+                      <button
+                        disabled={product.quantity > 0 ? false : true}
+                        className="plus-minus-btn"
+                        onClick={() =>
+                          this.props.decreaseQuantity(product.id)
+                        }
+                      >
+                        -
+                      </button>
+                    </figcaption>
+                    <img
+                      src={product.imageUrl}
+                      className="cart-overlay-image"
+                      alt={product.name}
+                    ></img>
+                  </figure>
+                </div>
               </li>
             ))}
           </ul>
@@ -131,6 +146,7 @@ const mapStateToProps = (state) => {
 const actionCreators = {
   increaseQuantity,
   decreaseQuantity,
+  deleteFromCart,
 };
 
 export default connect(mapStateToProps, actionCreators)(CartOverlay);
