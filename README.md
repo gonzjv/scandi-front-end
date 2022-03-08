@@ -28,4 +28,6 @@ npm install
 npm start
 ```
 
-### It's not perfect, but great graphql & react class components experience! ⛳
+It's not perfect, but great graphql & react class components experience! ⛳
+
+Thank you and have a sunny 🌻 day!
