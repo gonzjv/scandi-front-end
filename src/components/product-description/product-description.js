@@ -20,8 +20,8 @@ class ProductDescription extends React.Component {
 
   async componentDidMount() {
     const id = this.props.params.id;
-    const products = await client.post(getDescriptionQuery(id));
-    this.setState({ data: products });
+    const productData = await client.post(getDescriptionQuery(id));
+    this.setState({ data: productData });
 
     const product = this.state.data.product;
     const initialImageUrl = product.gallery[0];
@@ -72,11 +72,6 @@ class ProductDescription extends React.Component {
             <strong>{product.name} </strong>
             <p>{product.brand} </p>
           </div>
-          {/* <p>Category: {product.category} </p> */}
-          {/* <p>
-            In stock:
-            {product.inStock ? <span>✅</span> : <span>❌</span>}
-          </p> */}
           <div className="attributes">
             {product.attributes.map((attribute) => (
               <div className="attribute" key={attribute.name}>

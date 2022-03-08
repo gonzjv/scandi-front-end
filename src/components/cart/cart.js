@@ -4,6 +4,7 @@ import './cart.css';
 import {
   increaseQuantity,
   decreaseQuantity,
+  deleteFromCart,
 } from '../../redux/actions/cart-actions.js';
 import { v4 as uuidv4 } from 'uuid';
 import { unsetMiniCartVisible } from '../../redux/actions/layout-actions.js';
@@ -54,32 +55,47 @@ class Cart extends React.Component {
                   <strong>{currency}</strong>
                 </p>
               </div>
-              <figure>
-                <figcaption className="quantity">
-                  <button
-                    className="plus-minus-btn"
-                    onClick={() =>
-                      this.props.increaseQuantity(product.id)
-                    }
-                  >
-                    +
-                  </button>
-                  {product.quantity}
-                  <button
-                    className="plus-minus-btn"
-                    onClick={() =>
-                      this.props.decreaseQuantity(product.id)
-                    }
-                  >
-                    -
-                  </button>
-                </figcaption>
-                <img
-                  src={product.imageUrl}
-                  className="image"
-                  alt={product.name}
-                ></img>
-              </figure>
+              <div className="right-side">
+                <button
+                  className="delete"
+                  onClick={() =>
+                    this.props.deleteFromCart(
+                      product.id,
+                      product.prices,
+                      product.quantity
+                    )
+                  }
+                >
+                  delete
+                </button>
+                <figure>
+                  <figcaption className="quantity">
+                    <button
+                      className="plus-minus-btn"
+                      onClick={() =>
+                        this.props.increaseQuantity(product.id)
+                      }
+                    >
+                      +
+                    </button>
+                    {product.quantity}
+                    <button
+                      disabled={product.quantity > 0 ? false : true}
+                      className="plus-minus-btn"
+                      onClick={() =>
+                        this.props.decreaseQuantity(product.id)
+                      }
+                    >
+                      -
+                    </button>
+                  </figcaption>
+                  <img
+                    src={product.imageUrl}
+                    className="image"
+                    alt={product.name}
+                  ></img>
+                </figure>
+              </div>
             </li>
           ))}
         </ul>
@@ -105,6 +121,7 @@ const mapStateToProps = (state) => {
 const actionCreators = {
   increaseQuantity,
   decreaseQuantity,
+  deleteFromCart,
   unsetMiniCartVisible,
 };
 
