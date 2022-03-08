@@ -3,7 +3,7 @@
   z-index: 100;
   width: 325px;
   height: 540px;
-  top: 50px;
+  top: 80px;
   right: 90px;
   overflow: auto;
 
@@ -52,13 +52,12 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  /* border-top: 2px solid #e5e5e5; */
-  /* padding-top: 1%; */
   margin-bottom: 10%;
 }
 .overlay-product-list .product .price {
   display: flex;
   gap: 5px;
+  font-weight: bold;
 }
 .overlay-product-list .product .left-side {
   display: flex;
@@ -66,6 +65,31 @@
   gap: 5px;
   margin-left: 5%;
 }
+
+.overlay-product-list .product .right-side {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.product .right-side .delete {
+  height: fit-content;
+  border: none;
+  background-color: white;
+  font-weight: 100;
+  color: #8d8f9a;
+  text-decoration: underline dashed;
+}
+
+.product .right-side .delete:hover {
+  height: fit-content;
+  border: none;
+  background-color: white;
+  font-weight: 100;
+  color: lightcoral;
+  text-decoration: underline dashed;
+}
+
 .overlay-product-list .image {
   width: 150px;
   object-fit: contain;
@@ -76,15 +100,12 @@
   margin: 0;
 }
 
-.overlay-product-list .product .name {
-  font-weight: 200;
-}
-
 .overlay-product-list .attributes {
   display: flex;
   flex-direction: column;
   list-style: none;
   padding: 0;
+  gap: 10px;
 }
 .overlay-product-list .attributes .element {
   display: flex;
@@ -93,10 +114,12 @@
 }
 
 .overlay-product-list .attributes .value {
+  font-size: small;
   font-weight: 300;
 }
 
 .overlay-product-list .attributes .element .name {
+  font-size: small;
   font-weight: 200;
 }
 
@@ -133,7 +156,13 @@
 
 .overlay-footer .view-bag {
   width: 40%;
-  height: 40px;
+  height: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-decoration: none;
+  color: #1d1f22;
 
   background-color: white;
   border: 1px solid black;
@@ -141,6 +170,16 @@
 }
 .overlay-footer .view-bag:active {
   width: 40%;
+  height: 38px;
+
+  color: white;
+  background-color: #5ece7b;
+  border: 1px solid #5ece7b;
+  transition: 200ms;
+}
+
+.check-out {
+  width: 120px;
   height: 40px;
 
   color: white;
@@ -149,18 +188,8 @@
   transition: 200ms;
 }
 
-.overlay-footer .check-out {
-  width: 40%;
-  height: 40px;
-
-  color: white;
-  background-color: #5ece7b;
-  border: 1px solid #5ece7b;
-  transition: 200ms;
-}
-
-.overlay-footer .check-out:active {
-  width: 40%;
+.check-out:active {
+  width: 120px;
   height: 40px;
 
   color: #5ece7b;

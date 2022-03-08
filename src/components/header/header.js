@@ -8,12 +8,13 @@ import {
   setYen,
   setRuble,
 } from '../../redux/actions/currency-actions.js';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import CartOverlay from '../cart-overlay/cart-overlay.js';
 import {
   setMiniCartVisible,
   unsetMiniCartVisible,
 } from '../../redux/actions/layout-actions.js';
+import { ReactComponent as CartImgSvg } from '../../assets/img/cart.svg';
 
 class Header extends React.Component {
   constructor() {
@@ -38,6 +39,8 @@ class Header extends React.Component {
     const setRuble = this.props.setRuble;
     const isMiniCartVisible = this.props.isMiniCartVisible;
     const OPTIONS = ['$', '£', 'A$', '¥', '₽'];
+    const categories = this.props.categories;
+    const cart = this.props.cart;
 
     const handleCurrencyChange = (event) =>
       event.target.value === '$'
@@ -53,24 +56,53 @@ class Header extends React.Component {
     return (
       <header className="header">
         <nav className="navigation">
-          <Link to="/tech">Tech</Link>
-          <Link to="/clothes">Clothes</Link>
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive ? 'nav-btn-active' : 'nav-btn'
+            }
+          >
+            Home
+          </NavLink>
+          {categories.map((category) => (
+            <NavLink
+              to={category.name}
+              key={category.name}
+              className={({ isActive }) =>
+                isActive ? 'nav-btn-active' : 'nav-btn'
+              }
+            >
+              {category.name}
+            </NavLink>
+          ))}
         </nav>
-        <aside className="header-left-side">
-          <select value={currency} onChange={handleCurrencyChange}>
+        <aside className="header-right-side">
+          <select
+            className="currency-switch"
+            value={currency}
+            onChange={handleCurrencyChange}
+          >
             {OPTIONS.map((elem) => (
               <option key={elem}>{elem}</option>
             ))}
           </select>
-          {/* <Link to="/cart">🛒</Link> */}
-          <button onClick={() => this.handleCartButton()}>🛒</button>
+          <button
+            className="cart-btn"
+            onClick={() => this.handleCartButton()}
+          >
+            <CartImgSvg />
+            {cart.itemsInCart > 0 ? (
+              <div className="items-in-cart">{cart.itemsInCart}</div>
+            ) : (
+              ''
+            )}
+          </button>
         </aside>
         {isMiniCartVisible ? (
           <>
             <div
               className="cover"
               onClick={() => {
-                // this.props.unsetMiniCartVisible();
                 this.handleHideMiniCart();
               }}
             >
@@ -90,7 +122,9 @@ class Header extends React.Component {
 const mapStateToProps = (state) => {
   const currency = state.currency;
   const { isMiniCartVisible } = state.layout;
-  return { currency, isMiniCartVisible };
+  const categories = state.categories;
+  const cart = state.cart;
+  return { currency, isMiniCartVisible, categories, cart };
 };
 const actionCreators = {
   setDollar,

@@ -18,7 +18,6 @@ class Products extends React.Component {
     const products = await client.post(
       GetProductsQuery(this.props.category)
     );
-    console.log('props.category', this.props.category);
     this.setState({ data: products });
   }
   handleNav(id) {
@@ -33,40 +32,42 @@ class Products extends React.Component {
     console.log('data', data);
 
     return (
-      <main className="product-list">
-        {this.props.category}
+      <section className="product-list">
         {navigateToDesription && (
           <Navigate to={`/description/${productId}`} replace={true} />
         )}
         {data.category.products.map((el) => (
-          <div
+          <figure
             onClick={() => this.handleNav(el.id)}
             key={el.name}
             className="product"
           >
-            <figure>
-              <img
-                src={el.gallery[0]}
-                className="image"
-                alt={el.name}
-              ></img>
-            </figure>
-            <p>{el.name}</p>
-            <div className="price">
-              <p>
-                {Math.round(
-                  Number(
-                    el.prices.find(
-                      (el) => el.currency.symbol === currency
-                    ).amount
-                  )
-                ).toString()}
-              </p>
-              <p>{currency}</p>
+            <img
+              src={el.gallery[0]}
+              className="image"
+              alt={el.name}
+            ></img>
+            <figcaption className="description">
+              <p>{el.name}</p>
+              <strong className="price">
+                <p>
+                  {Math.round(
+                    Number(
+                      el.prices.find(
+                        (el) => el.currency.symbol === currency
+                      ).amount
+                    )
+                  ).toString()}
+                </p>
+                <p>{currency}</p>
+              </strong>
+            </figcaption>
+            <div className={el.inStock ? 'hidden' : 'out-of-stock'}>
+              OUT OF STOCK
             </div>
-          </div>
+          </figure>
         ))}
-      </main>
+      </section>
     );
   }
 }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {
   increaseQuantity,
   decreaseQuantity,
+  deleteFromCart,
 } from '../../redux/actions/cart-actions.js';
 import './cart-overlay.css';
 import { v4 as uuidv4 } from 'uuid';
@@ -10,6 +11,7 @@ import {
   disableBodyScroll,
   enableBodyScroll,
 } from 'body-scroll-lock';
+import { NavLink } from 'react-router-dom';
 
 class CartOverlay extends React.Component {
   targetElem = null;
@@ -33,7 +35,6 @@ class CartOverlay extends React.Component {
       )
     ).toString();
 
-    console.log('total:', total);
     console.log('cart:', cart);
 
     return (
@@ -47,7 +48,7 @@ class CartOverlay extends React.Component {
             {cart.items.map((product) => (
               <li key={uuidv4()} className="product">
                 <div className="left-side">
-                  <p className="name">{product.name}</p>
+                  <strong className="name">{product.name}</strong>
                   <ul className="attributes">
                     {Object.keys(product.attributes).map((key) => (
                       <li className="element" key={key}>
@@ -71,47 +72,64 @@ class CartOverlay extends React.Component {
                     <p>{currency}</p>
                   </div>
                 </div>
-                <figure>
-                  <figcaption className="quantity">
-                    <button
-                      className="plus-minus-btn"
-                      onClick={() =>
-                        this.props.increaseQuantity(product.id)
-                      }
-                    >
-                      +
-                    </button>
-                    {product.quantity}
-                    <button
-                      disabled={product.quantity > 0 ? false : true}
-                      className="plus-minus-btn"
-                      onClick={() =>
-                        this.props.decreaseQuantity(product.id)
-                      }
-                    >
-                      -
-                    </button>
-                  </figcaption>
-                  <img
-                    src={product.imageUrl}
-                    className="cart-overlay-image"
-                    alt={product.name}
-                  ></img>
-                </figure>
+                <div className="right-side">
+                  <button
+                    className="delete"
+                    onClick={() =>
+                      this.props.deleteFromCart(
+                        product.id,
+                        product.prices,
+                        product.quantity
+                      )
+                    }
+                  >
+                    delete
+                  </button>
+                  <figure>
+                    <figcaption className="quantity">
+                      <button
+                        className="plus-minus-btn"
+                        onClick={() =>
+                          this.props.increaseQuantity(product.id)
+                        }
+                      >
+                        +
+                      </button>
+                      {product.quantity}
+                      <button
+                        disabled={product.quantity > 0 ? false : true}
+                        className="plus-minus-btn"
+                        onClick={() =>
+                          this.props.decreaseQuantity(product.id)
+                        }
+                      >
+                        -
+                      </button>
+                    </figcaption>
+                    <img
+                      src={product.imageUrl}
+                      className="cart-overlay-image"
+                      alt={product.name}
+                    ></img>
+                  </figure>
+                </div>
               </li>
             ))}
           </ul>
         </div>
         <footer className="overlay-footer">
           <div className="total">
-            <h4>Total</h4>
-            <h4>
+            <strong>Total</strong>
+            <strong>
               {total}
               {currency}
-            </h4>
+            </strong>
           </div>
           <div className="buttons">
-            <button className="view-bag"> VIEW BAG</button>
+            <NavLink className="view-bag" to="cart">
+              VIEW BAG
+            </NavLink>
+            {/* <button className="view-bag"> VIEW BAG</button> */}
             <button className="check-out">CHECK OUT</button>
           </div>
         </footer>
@@ -128,6 +146,7 @@ const mapStateToProps = (state) => {
 const actionCreators = {
   increaseQuantity,
   decreaseQuantity,
+  deleteFromCart,
 };
 
 export default connect(mapStateToProps, actionCreators)(CartOverlay);

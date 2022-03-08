@@ -20,8 +20,8 @@ class ProductDescription extends React.Component {
 
   async componentDidMount() {
     const id = this.props.params.id;
-    const products = await client.post(getDescriptionQuery(id));
-    this.setState({ data: products });
+    const productData = await client.post(getDescriptionQuery(id));
+    this.setState({ data: productData });
 
     const product = this.state.data.product;
     const initialImageUrl = product.gallery[0];
@@ -46,7 +46,7 @@ class ProductDescription extends React.Component {
     console.log('data:', data);
 
     return (
-      <main className="description">
+      <main className="item-description">
         <section className="descr-left">
           <figure className="gallery">
             <aside className="sidebar">
@@ -68,37 +68,42 @@ class ProductDescription extends React.Component {
           </figure>
         </section>
         <section className="descr-right">
-          <p>Name: {product.name} </p>
-          <p>Brand: {product.brand} </p>
-          <p>Category: {product.category} </p>
-          <p>
-            In stock:
-            {product.inStock ? <span>✅</span> : <span>❌</span>}
-          </p>
+          <div className="top">
+            <strong>{product.name} </strong>
+            <p>{product.brand} </p>
+          </div>
           <div className="attributes">
             {product.attributes.map((attribute) => (
               <div className="attribute" key={attribute.name}>
-                {attribute.name} :
-                {attribute.items.map((item) => (
-                  <button
-                    className={
-                      item.displayValue === attributes[attribute.name]
-                        ? 'chosen-attribute'
-                        : ''
-                    }
-                    key={item.displayValue}
-                    onClick={() =>
-                      setAttribute(attribute.name, item.displayValue)
-                    }
-                  >
-                    {item.displayValue}
-                  </button>
-                ))}
+                <strong>{attribute.name}:</strong>
+                <div className="values">
+                  {attribute.items.map((item) => (
+                    <button
+                      className={
+                        item.displayValue ===
+                        attributes[attribute.name]
+                          ? 'chosen-attribute'
+                          : 'attribute-btn'
+                      }
+                      key={item.displayValue}
+                      onClick={() =>
+                        setAttribute(
+                          attribute.name,
+                          item.displayValue
+                        )
+                      }
+                    >
+                      {item.displayValue}
+                    </button>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
           <div className="price">
-            <p>
+            <strong>Price:</strong>
+            <p className="price-value">
+              {currency}
               {Math.round(
                 Number(
                   product.prices.find(
@@ -107,9 +112,15 @@ class ProductDescription extends React.Component {
                 )
               ).toString()}
             </p>
-            <p>{currency}</p>
+            {product.inStock ? (
+              ''
+            ) : (
+              <p className="price-out-of-stock">OUT OF STOCK</p>
+            )}
           </div>
+          {console.log('inStock', product.inStock)}
           <button
+            disabled={product.inStock ? false : true}
             onClick={() =>
               addToCart(
                 product.name,

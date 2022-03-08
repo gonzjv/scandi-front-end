@@ -57,6 +57,26 @@ const cart = (state = INITIAL_STATE, action) => {
         ],
       };
 
+    case 'DELETE_FROM_CART':
+      const { itemId, itemPrices, itemQuantity } = action.payload;
+      return {
+        ...state,
+        items: state.items.filter((item) => item.id !== itemId),
+        itemsInCart: state.itemsInCart - 1,
+        total: state.total.map((el) => {
+          return {
+            ...el,
+            amount:
+              el.amount -
+              itemPrices.find(
+                (price) =>
+                  price.currency.symbol === el.currency.symbol
+              ).amount *
+                itemQuantity,
+          };
+        }),
+      };
+
     case 'INCREASE_QUANTITY':
       return {
         ...state,

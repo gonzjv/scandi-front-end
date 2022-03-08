@@ -1,18 +1,50 @@
 .product-list {
-  width: 80%;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  gap: 20px;
 }
 
-.product {
+.product-list .product {
+  position: relative;
   width: 30%;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.out-of-stock {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  color: #8d8f9a;
+  opacity: 0.5;
 }
 
-.product .image {
+.hidden {
+  display: none;
+}
+
+.product .description {
   width: 100%;
-  /* object-fit: contain; */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.product-list .product .image {
+  width: 100%;
+  height: 250px;
+  object-fit: contain;
 }
 
 .price {
