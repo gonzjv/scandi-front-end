@@ -13,6 +13,7 @@ import { setCategories } from './redux/actions/categories-actions.js';
 
 class App extends React.Component {
   async componentDidMount() {
+    client.setEndpoint('https://scandi-test-backend.herokuapp.com/');
     const { categories } = await client.post(GetCategoriesQuery());
     this.props.setCategories(categories);
   }
