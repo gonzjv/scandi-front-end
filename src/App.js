@@ -1,19 +1,20 @@
 import './App.css';
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { client } from '@tilework/opus';
+import { connect } from 'react-redux';
+
 import Layout from './components/layout/layout.js';
 import Products from './components/products/products.js';
 import ProductDescription from './components/product-description/product-description.js';
 import Cart from './components/cart/cart.js';
 import Home from './components/home/home.js';
 import GetCategoriesQuery from './getCategoriesQuery.js';
-import { client } from '@tilework/opus';
-import { connect } from 'react-redux';
 import { setCategories } from './redux/actions/categories-actions.js';
 
 class App extends React.Component {
   async componentDidMount() {
-    client.setEndpoint('https://scandi-test-backend.herokuapp.com/');
+    client.setEndpoint(process.env.REACT_APP_API_URL);
     const { categories } = await client.post(GetCategoriesQuery());
     this.props.setCategories(categories);
   }
