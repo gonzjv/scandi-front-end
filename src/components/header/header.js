@@ -15,6 +15,7 @@ import {
   unsetMiniCartVisible,
 } from '../../redux/actions/layout-actions.js';
 import { ReactComponent as CartImgSvg } from '../../assets/img/cart.svg';
+import { ReactComponent as LogoSvg } from '../../assets/img/logo.svg';
 
 class Header extends React.Component {
   constructor() {
@@ -76,6 +77,7 @@ class Header extends React.Component {
             </NavLink>
           ))}
         </nav>
+        <LogoSvg />
         <aside className="header-right-side">
           <select
             className="currency-switch"

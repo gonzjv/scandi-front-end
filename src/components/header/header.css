@@ -2,11 +2,14 @@
   height: 80px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   color: #1d1f22;
 }
 .navigation {
   display: flex;
   gap: 20px;
+  height: 100%;
+  width: 40%;
   justify-content: flex-start;
 }
 
@@ -37,6 +40,8 @@
 .header-right-side {
   display: flex;
   gap: 10px;
+  width: 40%;
+  justify-content: flex-end;
   align-items: center;
 }
 
@@ -49,7 +54,7 @@
 
 .cart-btn {
   position: relative;
-  margin-top: 8%;
+  margin-top: 2%;
   background-color: white;
   border: none;
 }
