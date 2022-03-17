@@ -1,4 +1,8 @@
 const PRODUCTS_INITIAL_STATE = {
+  addToCartIcon: {
+    display: false,
+    id: '',
+  },
   navigateToDesription: false,
   data: {
     category: {

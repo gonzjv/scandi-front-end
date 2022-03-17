@@ -5,6 +5,7 @@ import PRODUCTS_INITIAL_STATE from './initial-state.js';
 import GetProductsQuery from './products-query.js';
 import { connect } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import { ReactComponent as AddToCartIcon } from '../../assets/img/add-to-cart.svg';
 
 client.setEndpoint('http://localhost:4000/');
 
@@ -20,8 +21,22 @@ class Products extends React.Component {
     );
     this.setState({ data: products });
   }
+
   handleNav(id) {
     this.setState({ navigateToDesription: true, productId: id });
+  }
+
+  handleMouseEnter(id) {
+    this.setState({
+      addToCartIcon: { display: true, id: id },
+    });
+    console.log('addToCartIcon:', this.state.addToCartIcon);
+  }
+
+  handleMouseLeave() {
+    this.setState({
+      addToCartIcon: { display: false, id: '' },
+    });
   }
 
   render() {
@@ -39,6 +54,8 @@ class Products extends React.Component {
         {data.category.products.map((el) => (
           <figure
             onClick={() => this.handleNav(el.id)}
+            onMouseEnter={() => this.handleMouseEnter(el.id)}
+            onMouseLeave={() => this.handleMouseLeave}
             key={el.name}
             className="product"
           >
@@ -65,6 +82,10 @@ class Products extends React.Component {
             <div className={el.inStock ? 'hidden' : 'out-of-stock'}>
               OUT OF STOCK
             </div>
+            {this.state.addToCartIcon.display &&
+            this.state.addToCartIcon.id === el.id ? (
+              <AddToCartIcon className="to-cart-icon" />
+            ) : undefined}
           </figure>
         ))}
       </section>
