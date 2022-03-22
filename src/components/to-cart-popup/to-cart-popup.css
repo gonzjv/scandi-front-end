@@ -1,0 +1,100 @@
+.to-cart-popup {
+  width: 600px;
+  height: 600px;
+  position: fixed;
+  top: calc(50vh - 300px);
+  left: calc(50vw - 300px);
+
+  display: flex;
+  overflow: auto;
+  z-index: 100;
+  padding: 3%;
+
+  background: white;
+  border-radius: 5px;
+}
+
+.to-cart-popup .descr-image {
+  height: 350px;
+  object-fit: contain;
+}
+
+.right-side {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  overflow: auto;
+}
+
+.right-side .top {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.right-side .attributes {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  /* overflow: scroll; */
+}
+
+.right-side .attribute {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.right-side .attribute-btn {
+  min-width: 60px;
+  height: 45px;
+  border: 1px solid #a6a6a6;
+  background-color: white;
+}
+
+.right-side .chosen-attribute {
+  min-width: 60px;
+  height: 45px;
+  border: 1px solid #a6a6a6;
+  background-color: #1d1f22;
+  color: white;
+}
+
+.right-side .price {
+  display: flex;
+  flex-direction: column;
+}
+
+.right-side .price-value {
+  font-size: larger;
+  font-weight: bold;
+}
+
+.right-side .add-to-cart {
+  height: 50px;
+  border: 1px solid #5ece7b;
+  background-color: #5ece7b;
+  color: white;
+  transition: 200ms;
+}
+
+.right-side .add-to-cart:active {
+  color: #5ece7b;
+  background-color: white;
+  border: 1px solid #5ece7b;
+  transition: 200ms;
+}
+
+.right-side .add-to-cart:disabled {
+  color: #8d8f9a;
+  background-color: white;
+  border: 1px solid #8d8f9a;
+  transition: 200ms;
+}

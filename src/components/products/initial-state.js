@@ -1,4 +1,7 @@
 const PRODUCTS_INITIAL_STATE = {
+  toCartPopup: {
+    display: false,
+  },
   addToCartIcon: {
     display: false,
     id: '',

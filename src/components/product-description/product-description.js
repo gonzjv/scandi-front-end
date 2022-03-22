@@ -2,7 +2,7 @@ import { client } from '@tilework/opus';
 import React from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import getDescriptionQuery from './get-description-query.js';
+import getDescriptionQuery from '../../queries/get-description-query.js';
 import DESCRIPTION_INITIAL_STATE from './initial-state.js';
 import './product-description.css';
 import { setMainImageUrl } from '../../redux/actions/main-image-actions.js';
@@ -27,7 +27,7 @@ class ProductDescription extends React.Component {
     const initialImageUrl = product.gallery[0];
     this.props.setMainImageUrl(initialImageUrl);
 
-    this.props.clearAttributes();
+    // this.props.clearAttributes();
 
     product.attributes.map((elem) =>
       this.props.setAttribute(elem.name, elem.items[0].displayValue)

@@ -76,7 +76,7 @@
   min-width: 20px;
 }
 
-.cover {
+.header .cover {
   position: fixed;
   top: 0px;
   left: 0px;
