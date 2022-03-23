@@ -31,7 +31,6 @@ class Products extends React.Component {
     this.setState({
       addToCartIcon: { display: true, id: id },
     });
-    console.log('addToCartIcon:', this.state.addToCartIcon);
   }
 
   handleMouseLeave() {
@@ -43,6 +42,12 @@ class Products extends React.Component {
   handleToCartClick(productId) {
     this.setState({
       toCartPopup: { display: true, productId: productId },
+    });
+  }
+
+  handleHideCartPopup() {
+    this.setState({
+      toCartPopup: { display: false, productId: '' },
     });
   }
 
@@ -105,9 +110,11 @@ class Products extends React.Component {
         ))}
         {toCartPopup.display ? (
           <>
-            <div className="cover"></div>
+            <div
+              onClick={() => this.handleHideCartPopup()}
+              className="cover"
+            ></div>
             <ToCartPopup id={toCartPopup.productId} />
-            {/* <ToCartPopup /> */}
           </>
         ) : undefined}
       </section>

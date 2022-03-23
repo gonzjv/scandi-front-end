@@ -118,7 +118,6 @@ class ProductDescription extends React.Component {
               <p className="price-out-of-stock">OUT OF STOCK</p>
             )}
           </div>
-          {console.log('inStock', product.inStock)}
           <button
             disabled={product.inStock ? false : true}
             onClick={() =>
