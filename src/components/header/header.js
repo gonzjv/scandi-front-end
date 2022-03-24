@@ -21,6 +21,7 @@ class Header extends React.Component {
   constructor() {
     super();
     this.state = { isMiniCartVisible: false };
+    this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
   }
 
   handleCartButton() {
@@ -31,28 +32,27 @@ class Header extends React.Component {
     this.props.unsetMiniCartVisible();
   }
 
+  handleCurrencyChange(event) {
+    const { setDollar, setPound, setAussieDollar, setYen, setRuble } =
+      this.props;
+    console.log('event', event.target.value);
+    event.target.value === '$'
+      ? setDollar()
+      : event.target.value === '£'
+      ? setPound()
+      : event.target.value === 'A$'
+      ? setAussieDollar()
+      : event.target.value === '¥'
+      ? setYen()
+      : setRuble();
+  }
+
   render() {
     const currency = this.props.currency;
-    const setDollar = this.props.setDollar;
-    const setPound = this.props.setPound;
-    const setAussieDollar = this.props.setAussieDollar;
-    const setYen = this.props.setYen;
-    const setRuble = this.props.setRuble;
     const isMiniCartVisible = this.props.isMiniCartVisible;
     const OPTIONS = ['$', '£', 'A$', '¥', '₽'];
     const categories = this.props.categories;
     const cart = this.props.cart;
-
-    const handleCurrencyChange = (event) =>
-      event.target.value === '$'
-        ? setDollar()
-        : event.target.value === '£'
-        ? setPound()
-        : event.target.value === 'A$'
-        ? setAussieDollar()
-        : event.target.value === '¥'
-        ? setYen()
-        : setRuble();
 
     return (
       <header className="header">
@@ -82,7 +82,7 @@ class Header extends React.Component {
           <select
             className="currency-switch"
             value={currency}
-            onChange={handleCurrencyChange}
+            onChange={this.handleCurrencyChange}
           >
             {OPTIONS.map((elem) => (
               <option key={elem}>{elem}</option>
