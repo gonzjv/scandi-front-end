@@ -38,6 +38,7 @@
   border-bottom: 2px #5ece7b solid;
 }
 .header-right-side {
+  position: relative;
   display: flex;
   gap: 10px;
   width: 40%;
@@ -45,18 +46,19 @@
   align-items: center;
 }
 
-.currency-switch {
-  text-align: end;
-  font-size: medium;
-  background-color: white;
-  border: none;
-}
-
 .cart-btn {
   position: relative;
   margin-top: 2%;
   background-color: white;
   border: none;
+}
+
+.cart-btn:hover {
+  position: relative;
+  margin-top: 2%;
+  background-color: white;
+  border: none;
+  cursor: pointer;
 }
 
 .cart-btn .items-in-cart {
@@ -96,4 +98,69 @@
 
 .cover.hidden {
   display: none;
+}
+
+.currency-switcher {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background: white;
+  border: none;
+  font-size: large;
+}
+
+.currency-switcher:hover {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background: white;
+  border: none;
+  font-size: large;
+  cursor: pointer;
+}
+
+.currency-switcher .currency-arrow {
+  margin-top: 4px;
+}
+
+.currency-switcher .currency-arrow-rotated {
+  transform: rotate(180deg);
+}
+
+.switcher-popup {
+  position: absolute;
+  top: 100%;
+  left: 65%;
+  width: 120px;
+  height: 170px;
+  z-index: 10;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  list-style: none;
+  margin-top: 5px;
+  padding: 0;
+  background: white;
+  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+}
+
+.currency-element {
+  display: flex;
+  gap: 5px;
+  border: none;
+  background: none;
+}
+
+.currency-element:hover {
+  display: flex;
+  gap: 5px;
+  border: none;
+  background: none;
+  color: #5ece7b;
+  cursor: pointer;
 }

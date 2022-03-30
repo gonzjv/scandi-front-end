@@ -1,13 +1,7 @@
 import React from 'react';
 import './header.css';
 import { connect } from 'react-redux';
-import {
-  setDollar,
-  setPound,
-  setAussieDollar,
-  setYen,
-  setRuble,
-} from '../../redux/actions/currency-actions.js';
+import { setCurrency } from '../../redux/actions/currency-actions.js';
 import { NavLink } from 'react-router-dom';
 import CartOverlay from '../cart-overlay/cart-overlay.js';
 import {
@@ -16,12 +10,28 @@ import {
 } from '../../redux/actions/layout-actions.js';
 import { ReactComponent as CartImgSvg } from '../../assets/img/cart.svg';
 import { ReactComponent as LogoSvg } from '../../assets/img/logo.svg';
+import { ReactComponent as SwitcherArrow } from '../../assets/img/switcher-arrow.svg';
+import GetCurrenciesQuery from '../../queries/get-currencies-query.js';
+import { client } from '@tilework/opus';
 
 class Header extends React.Component {
   constructor() {
     super();
-    this.state = { isMiniCartVisible: false };
-    this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
+    this.state = {
+      isCurrencySwitcherVisible: false,
+      data: {
+        currencies: [],
+      },
+    };
+
+    this.handleCurrencyBtnClick =
+      this.handleCurrencyBtnClick.bind(this);
+  }
+
+  async componentDidMount() {
+    const currencies = await client.post(GetCurrenciesQuery());
+    this.setState({ data: currencies });
+    console.log('state', this.state);
   }
 
   handleCartButton() {
@@ -32,27 +42,25 @@ class Header extends React.Component {
     this.props.unsetMiniCartVisible();
   }
 
-  handleCurrencyChange(event) {
-    const { setDollar, setPound, setAussieDollar, setYen, setRuble } =
-      this.props;
-    console.log('event', event.target.value);
-    event.target.value === '$'
-      ? setDollar()
-      : event.target.value === '£'
-      ? setPound()
-      : event.target.value === 'A$'
-      ? setAussieDollar()
-      : event.target.value === '¥'
-      ? setYen()
-      : setRuble();
+  handleCurrencySwitch(symbol) {
+    this.props.setCurrency(symbol);
+    this.setState({ isCurrencySwitcherVisible: false });
+  }
+
+  handleCurrencyBtnClick() {
+    this.setState({
+      isCurrencySwitcherVisible:
+        !this.state.isCurrencySwitcherVisible,
+    });
   }
 
   render() {
-    const currency = this.props.currency;
-    const isMiniCartVisible = this.props.isMiniCartVisible;
-    const OPTIONS = ['$', '£', 'A$', '¥', '₽'];
-    const categories = this.props.categories;
-    const cart = this.props.cart;
+    const { currency } = this.props;
+    const { isMiniCartVisible } = this.props;
+    const { isCurrencySwitcherVisible } = this.state;
+    const { currencies } = this.state.data;
+    const { categories } = this.props;
+    const { cart } = this.props;
 
     return (
       <header className="header">
@@ -79,15 +87,41 @@ class Header extends React.Component {
         </nav>
         <LogoSvg />
         <aside className="header-right-side">
-          <select
-            className="currency-switch"
-            value={currency}
-            onChange={this.handleCurrencyChange}
+          <button
+            onClick={this.handleCurrencyBtnClick}
+            className="currency-switcher"
           >
-            {OPTIONS.map((elem) => (
-              <option key={elem}>{elem}</option>
+            {currency}
+            <SwitcherArrow
+              className={
+                isCurrencySwitcherVisible
+                  ? 'currency-arrow-rotated'
+                  : 'currency-arrow'
+              }
+            >
+              ^
+            </SwitcherArrow>
+          </button>
+          <ul
+            className={
+              isCurrencySwitcherVisible
+                ? 'switcher-popup'
+                : 'switcher-popup hidden'
+            }
+          >
+            {currencies.map((currency) => (
+              <li
+                onClick={() => {
+                  this.handleCurrencySwitch(currency.symbol);
+                }}
+                className="currency-element"
+                key={currency.label}
+              >
+                <span>{currency.symbol}</span>
+                <span>{currency.label}</span>
+              </li>
             ))}
-          </select>
+          </ul>
           <button
             className="cart-btn"
             onClick={() => this.handleCartButton()}
@@ -129,11 +163,7 @@ const mapStateToProps = (state) => {
   return { currency, isMiniCartVisible, categories, cart };
 };
 const actionCreators = {
-  setDollar,
-  setPound,
-  setAussieDollar,
-  setYen,
-  setRuble,
+  setCurrency,
   setMiniCartVisible,
   unsetMiniCartVisible,
 };
