@@ -24,6 +24,30 @@ const DESCRIPTION_INITIAL_STATE = {
           },
           amount: 'loading...',
         },
+        {
+          currency: {
+            symbol: '£',
+          },
+          amount: 'loading...',
+        },
+        {
+          currency: {
+            symbol: 'A$',
+          },
+          amount: 'loading...',
+        },
+        {
+          currency: {
+            symbol: '¥',
+          },
+          amount: 'loading...',
+        },
+        {
+          currency: {
+            symbol: '₽',
+          },
+          amount: 'loading...',
+        },
       ],
     },
   },
