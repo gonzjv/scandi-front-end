@@ -49,16 +49,18 @@ class ProductDescription extends React.Component {
       <main className="item-description">
         <section className="descr-left">
           <figure className="gallery">
-            <aside className="sidebar">
-              {product.gallery.map((url) => (
-                <img
-                  key={url}
-                  src={url}
-                  className="sidebar-image"
-                  alt={url}
-                  onClick={() => setMainImageUrl(url)}
-                ></img>
-              ))}
+            <aside className="sidebar-container">
+              <div className="sidebar">
+                {product.gallery.map((url) => (
+                  <img
+                    key={url}
+                    src={url}
+                    className="sidebar-image"
+                    alt={url}
+                    onClick={() => setMainImageUrl(url)}
+                  ></img>
+                ))}
+              </div>
             </aside>
             <img
               src={this.props.imageUrl}

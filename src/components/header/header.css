@@ -132,7 +132,7 @@
 .switcher-popup {
   position: absolute;
   top: 100%;
-  left: 65%;
+  right: 0%;
   width: 120px;
   height: 170px;
   z-index: 10;
