@@ -1,4 +1,5 @@
 const DESCRIPTION_INITIAL_STATE = {
+  isGalleryAtTop: true,
   data: {
     product: {
       name: '',

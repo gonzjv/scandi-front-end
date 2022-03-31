@@ -11,11 +11,15 @@ import {
   clearAttributes,
 } from '../../redux/actions/attributes.js';
 import { addToCart } from '../../redux/actions/cart-actions.js';
+import { ReactComponent as SwitcherArrow } from '../../assets/img/switcher-arrow.svg';
 
 class ProductDescription extends React.Component {
   constructor() {
     super();
     this.state = DESCRIPTION_INITIAL_STATE;
+
+    this.handleHoverUp = this.handleHoverUp.bind(this);
+    this.handleHoverDown = this.handleHoverDown.bind(this);
   }
 
   async componentDidMount() {
@@ -27,21 +31,33 @@ class ProductDescription extends React.Component {
     const initialImageUrl = product.gallery[0];
     this.props.setMainImageUrl(initialImageUrl);
 
-    // this.props.clearAttributes();
-
     product.attributes.map((elem) =>
       this.props.setAttribute(elem.name, elem.items[0].displayValue)
     );
   }
 
+  handleHoverUp() {
+    this.setState({
+      isGalleryAtTop: true,
+    });
+  }
+
+  handleHoverDown() {
+    this.setState({
+      isGalleryAtTop: false,
+    });
+  }
+
   render() {
-    const { data } = this.state;
-    const product = data.product;
-    const setMainImageUrl = this.props.setMainImageUrl;
-    const setAttribute = this.props.setAttribute;
-    const addToCart = this.props.addToCart;
-    const attributes = this.props.attributes;
-    const currency = this.props.currency;
+    const { data, isGalleryAtTop } = this.state;
+    const { product } = data;
+    const {
+      setMainImageUrl,
+      setAttribute,
+      addToCart,
+      attributes,
+      currency,
+    } = this.props;
 
     console.log('data:', data);
 
@@ -50,7 +66,17 @@ class ProductDescription extends React.Component {
         <section className="descr-left">
           <figure className="gallery">
             <aside className="sidebar-container">
-              <div className="sidebar">
+              <button
+                onMouseEnter={this.handleHoverUp}
+                className="btn-up"
+              >
+                <SwitcherArrow className="rotated" />
+              </button>
+              <div
+                className={
+                  isGalleryAtTop ? 'sidebar' : 'sidebar at-bottom'
+                }
+              >
                 {product.gallery.map((url) => (
                   <img
                     key={url}
@@ -61,6 +87,12 @@ class ProductDescription extends React.Component {
                   ></img>
                 ))}
               </div>
+              <button
+                onMouseEnter={this.handleHoverDown}
+                className="btn-down"
+              >
+                <SwitcherArrow />
+              </button>
             </aside>
             <img
               src={this.props.imageUrl}
