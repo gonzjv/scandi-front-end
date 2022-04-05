@@ -17,7 +17,9 @@ const getDescriptionQuery = (id) =>
       new Field('attributes', true)
         .addField(new Field('name'))
         .addField(
-          new Field('items', true).addField(new Field('displayValue'))
+          new Field('items', true)
+            .addField(new Field('displayValue'))
+            .addField(new Field('value'))
         )
     )
     .addField(

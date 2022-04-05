@@ -111,25 +111,33 @@ class ProductDescription extends React.Component {
               <div className="attribute" key={attribute.name}>
                 <strong>{attribute.name}:</strong>
                 <div className="values">
-                  {attribute.items.map((item) => (
-                    <button
-                      className={
-                        item.displayValue ===
-                        attributes[attribute.name]
-                          ? 'chosen-attribute'
-                          : 'attribute-btn'
-                      }
-                      key={item.displayValue}
-                      onClick={() =>
-                        setAttribute(
-                          attribute.name,
-                          item.displayValue
-                        )
-                      }
-                    >
-                      {item.displayValue}
-                    </button>
-                  ))}
+                  {attribute.name === 'Color' &&
+                    attribute.items.map((item) => (
+                      <button
+                        className="attribute-btn"
+                        style={{ backgroundColor: item.value }}
+                      ></button>
+                    ))}
+                  {attribute.name !== 'Color' &&
+                    attribute.items.map((item) => (
+                      <button
+                        className={
+                          item.displayValue ===
+                          attributes[attribute.name]
+                            ? 'chosen-attribute'
+                            : 'attribute-btn'
+                        }
+                        key={item.displayValue}
+                        onClick={() =>
+                          setAttribute(
+                            attribute.name,
+                            item.displayValue
+                          )
+                        }
+                      >
+                        {item.displayValue}
+                      </button>
+                    ))}
                 </div>
               </div>
             ))}

@@ -14,6 +14,7 @@ const DESCRIPTION_INITIAL_STATE = {
           items: [
             {
               displayValue: '',
+              value: '',
             },
           ],
         },
