@@ -31,8 +31,10 @@ class ProductDescription extends React.Component {
     const initialImageUrl = product.gallery[0];
     this.props.setMainImageUrl(initialImageUrl);
 
+    this.props.clearAttributes();
+
     product.attributes.map((elem) =>
-      this.props.setAttribute(elem.name, elem.items[0].displayValue)
+      this.props.setAttribute(elem.name, elem.items[0].value)
     );
   }
 
@@ -115,18 +117,14 @@ class ProductDescription extends React.Component {
                     attribute.items.map((item) => (
                       <button
                         className={
-                          item.displayValue ===
-                          attributes[attribute.name]
+                          item.value === attributes[attribute.name]
                             ? 'chosen-color'
                             : 'attribute-btn'
                         }
                         style={{ backgroundColor: item.value }}
-                        key={item.displayValue}
+                        key={item.value}
                         onClick={() =>
-                          setAttribute(
-                            attribute.name,
-                            item.displayValue
-                          )
+                          setAttribute(attribute.name, item.value)
                         }
                       ></button>
                     ))}
@@ -134,17 +132,13 @@ class ProductDescription extends React.Component {
                     attribute.items.map((item) => (
                       <button
                         className={
-                          item.displayValue ===
-                          attributes[attribute.name]
+                          item.value === attributes[attribute.name]
                             ? 'chosen-attribute'
                             : 'attribute-btn'
                         }
-                        key={item.displayValue}
+                        key={item.value}
                         onClick={() =>
-                          setAttribute(
-                            attribute.name,
-                            item.displayValue
-                          )
+                          setAttribute(attribute.name, item.value)
                         }
                       >
                         {item.displayValue}

@@ -53,9 +53,21 @@ class CartOverlay extends React.Component {
                     {Object.keys(product.attributes).map((key) => (
                       <li className="element" key={key}>
                         <p className="name">{key}:</p>
-                        <em className="value">
-                          {product.attributes[key]}
-                        </em>
+                        {key !== 'Color' && (
+                          <em className="value">
+                            {product.attributes[key]}
+                          </em>
+                        )}
+                        {key === 'Color' && (
+                          <div
+                            style={{
+                              backgroundColor:
+                                product.attributes[key],
+                              width: 30,
+                              height: 20,
+                            }}
+                          ></div>
+                        )}
                       </li>
                     ))}
                   </ul>
@@ -129,7 +141,6 @@ class CartOverlay extends React.Component {
             <NavLink className="view-bag" to="cart">
               VIEW BAG
             </NavLink>
-            {/* <button className="view-bag"> VIEW BAG</button> */}
             <button className="check-out">CHECK OUT</button>
           </div>
         </footer>
