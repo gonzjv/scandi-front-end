@@ -51,6 +51,12 @@
   color: white;
 }
 
+.descr-right .chosen-color {
+  min-width: 60px;
+  height: 45px;
+  border: 6px solid #5ece7b;
+}
+
 .descr-right .price {
   display: flex;
   flex-direction: column;

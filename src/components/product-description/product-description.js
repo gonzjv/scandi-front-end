@@ -114,8 +114,20 @@ class ProductDescription extends React.Component {
                   {attribute.name === 'Color' &&
                     attribute.items.map((item) => (
                       <button
-                        className="attribute-btn"
+                        className={
+                          item.displayValue ===
+                          attributes[attribute.name]
+                            ? 'chosen-color'
+                            : 'attribute-btn'
+                        }
                         style={{ backgroundColor: item.value }}
+                        key={item.displayValue}
+                        onClick={() =>
+                          setAttribute(
+                            attribute.name,
+                            item.displayValue
+                          )
+                        }
                       ></button>
                     ))}
                   {attribute.name !== 'Color' &&
