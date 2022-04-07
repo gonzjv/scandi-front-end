@@ -52,11 +52,11 @@ class CartOverlay extends React.Component {
                   <ul className="attributes">
                     {Object.keys(product.attributes).map((key) => (
                       <li className="element" key={key}>
-                        <p className="name">{key}:</p>
+                        {/* <p className="name">{key}:</p> */}
                         {key !== 'Color' && (
-                          <em className="value">
+                          <p className="value">
                             {product.attributes[key]}
-                          </em>
+                          </p>
                         )}
                         {key === 'Color' && (
                           <div

@@ -13,12 +13,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  /* gap: 20px; */
 }
 
 .cart-overlay .container {
   width: 90%;
-  height: 55%;
+  height: 60%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,6 +27,7 @@
 
 .cart-overlay-header {
   width: 90%;
+  height: 10%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -63,7 +64,6 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
-  margin-left: 5%;
 }
 
 .overlay-product-list .product .right-side {
@@ -114,6 +114,8 @@
 }
 
 .overlay-product-list .attributes .value {
+  border: 1px solid #1d1f22;
+  padding: 3px;
   font-size: small;
   font-weight: 300;
 }
@@ -137,9 +139,11 @@
 
 .overlay-footer {
   width: 90%;
+  height: 20%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  justify-content: flex-end;
+  gap: 30px;
   margin-bottom: 5%;
 }
 
