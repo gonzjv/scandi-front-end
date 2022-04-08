@@ -38,19 +38,33 @@ class Cart extends React.Component {
                   {product.allAttributes.map((attribute) => (
                     <li key={uuidv4()}>
                       <ul className="attribute">
-                        {attribute.items.map((item) => (
-                          <li
-                            className={
-                              item.value ===
-                              product.attributes[attribute.name]
-                                ? 'chosen-attribute'
-                                : 'attribute-item'
-                            }
-                            key={uuidv4()}
-                          >
-                            {item.value}
-                          </li>
-                        ))}
+                        {attribute.name === 'Color' &&
+                          attribute.items.map((item) => (
+                            <li
+                              className={
+                                item.value ===
+                                product.attributes[attribute.name]
+                                  ? 'chosen-color'
+                                  : 'attribute-color'
+                              }
+                              style={{ backgroundColor: item.value }}
+                              key={uuidv4()}
+                            ></li>
+                          ))}
+                        {attribute.name !== 'Color' &&
+                          attribute.items.map((item) => (
+                            <li
+                              className={
+                                item.value ===
+                                product.attributes[attribute.name]
+                                  ? 'chosen-attribute'
+                                  : 'attribute-item'
+                              }
+                              key={uuidv4()}
+                            >
+                              {item.value}
+                            </li>
+                          ))}
                       </ul>
                     </li>
                   ))}
