@@ -35,7 +35,26 @@ class Cart extends React.Component {
               <div className="left-side">
                 <strong>{product.name}</strong>
                 <ul className="attributes">
-                  {Object.keys(product.attributes).map((key) => (
+                  {product.allAttributes.map((attribute) => (
+                    <li key={uuidv4()}>
+                      <ul className="attribute">
+                        {attribute.items.map((item) => (
+                          <li
+                            className={
+                              item.value ===
+                              product.attributes[attribute.name]
+                                ? 'chosen-attribute'
+                                : 'attribute-item'
+                            }
+                            key={uuidv4()}
+                          >
+                            {item.value}
+                          </li>
+                        ))}
+                      </ul>
+                    </li>
+                  ))}
+                  {/* {Object.keys(product.attributes).map((key) => (
                     <li className="element" key={key}>
                       <p className="name">{key}:</p>
                       {key !== 'Color' && (
@@ -53,7 +72,7 @@ class Cart extends React.Component {
                         ></div>
                       )}
                     </li>
-                  ))}
+                  ))} */}
                 </ul>
                 <p className="price">
                   <strong>

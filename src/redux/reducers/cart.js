@@ -29,8 +29,14 @@ const INITIAL_STATE = {
 const cart = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'ADD_TO_CART':
-      const { name, imageUrl, prices, attributes, quantity } =
-        action.payload;
+      const {
+        name,
+        imageUrl,
+        prices,
+        attributes,
+        allAttributes,
+        quantity,
+      } = action.payload;
       return {
         itemsInCart: state.itemsInCart + 1,
         total: state.total.map((elem) => {
@@ -51,6 +57,7 @@ const cart = (state = INITIAL_STATE, action) => {
             imageUrl: imageUrl,
             prices: prices,
             attributes: attributes,
+            allAttributes: allAttributes,
             quantity: quantity,
             id: uuidv4(),
           },

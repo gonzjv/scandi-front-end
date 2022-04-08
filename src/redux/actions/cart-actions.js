@@ -1,4 +1,10 @@
-export const addToCart = (name, imageUrl, prices, attributes) => {
+export const addToCart = (
+  name,
+  imageUrl,
+  prices,
+  attributes,
+  allAttributes
+) => {
   return {
     type: 'ADD_TO_CART',
     payload: {
@@ -6,6 +12,7 @@ export const addToCart = (name, imageUrl, prices, attributes) => {
       imageUrl: imageUrl,
       prices: prices,
       attributes: attributes,
+      allAttributes: allAttributes,
       quantity: 1,
     },
   };
