@@ -50,24 +50,39 @@ class CartOverlay extends React.Component {
                 <div className="left-side">
                   <strong className="name">{product.name}</strong>
                   <ul className="attributes">
-                    {Object.keys(product.attributes).map((key) => (
-                      <li className="element" key={key}>
-                        {/* <p className="name">{key}:</p> */}
-                        {key !== 'Color' && (
-                          <p className="value">
-                            {product.attributes[key]}
-                          </p>
-                        )}
-                        {key === 'Color' && (
-                          <div
-                            style={{
-                              backgroundColor:
-                                product.attributes[key],
-                              width: 30,
-                              height: 20,
-                            }}
-                          ></div>
-                        )}
+                    {product.allAttributes.map((attribute) => (
+                      <li key={uuidv4()}>
+                        <ul className="attribute">
+                          {attribute.name === 'Color' &&
+                            attribute.items.map((item) => (
+                              <li
+                                className={
+                                  item.value ===
+                                  product.attributes[attribute.name]
+                                    ? 'chosen-color'
+                                    : 'attribute-color'
+                                }
+                                style={{
+                                  backgroundColor: item.value,
+                                }}
+                                key={uuidv4()}
+                              ></li>
+                            ))}
+                          {attribute.name !== 'Color' &&
+                            attribute.items.map((item) => (
+                              <li
+                                className={
+                                  item.value ===
+                                  product.attributes[attribute.name]
+                                    ? 'chosen-attribute'
+                                    : 'attribute-item'
+                                }
+                                key={uuidv4()}
+                              >
+                                {item.value}
+                              </li>
+                            ))}
+                        </ul>
                       </li>
                     ))}
                   </ul>

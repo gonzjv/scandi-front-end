@@ -80,19 +80,20 @@
   opacity: 0.5;
 }
 
-.attribute .chosen-attribute {
+.cart .attribute .chosen-attribute {
   padding: 3px;
   background-color: white;
   border: 1px solid #1d1f22;
 }
-.attribute .chosen-color {
+
+.cart .attribute .chosen-color {
   min-width: 60px;
   height: 45px;
   border: none;
   box-shadow: 2px 6px 5px rgba(168, 172, 176, 1);
 }
 
-.attribute .attribute-color {
+.cart .attribute .attribute-color {
   min-width: 60px;
   height: 45px;
   opacity: 0.3;

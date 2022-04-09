@@ -113,7 +113,8 @@ class ToCartPopup extends React.Component {
                   product.name,
                   product.gallery[0],
                   product.prices,
-                  attributes
+                  attributes,
+                  product.attributes
                 )
               }
               className="add-to-cart"

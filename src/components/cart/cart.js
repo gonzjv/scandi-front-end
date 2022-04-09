@@ -68,25 +68,6 @@ class Cart extends React.Component {
                       </ul>
                     </li>
                   ))}
-                  {/* {Object.keys(product.attributes).map((key) => (
-                    <li className="element" key={key}>
-                      <p className="name">{key}:</p>
-                      {key !== 'Color' && (
-                        <em className="value">
-                          {product.attributes[key]}
-                        </em>
-                      )}
-                      {key === 'Color' && (
-                        <div
-                          style={{
-                            backgroundColor: product.attributes[key],
-                            width: 30,
-                            height: 20,
-                          }}
-                        ></div>
-                      )}
-                    </li>
-                  ))} */}
                 </ul>
                 <p className="price">
                   <strong>
