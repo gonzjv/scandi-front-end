@@ -18,11 +18,11 @@ class CartOverlay extends React.Component {
 
   componentDidMount() {
     this.targetElem = document.querySelector('#cart-overlay');
-    disableBodyScroll(this.targetElem);
+    // disableBodyScroll(this.targetElem);
   }
 
   componentWillUnmount() {
-    enableBodyScroll(this.targetElem);
+    // enableBodyScroll(this.targetElem);
   }
 
   render() {
