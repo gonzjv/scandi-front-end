@@ -48,7 +48,19 @@ class CartOverlay extends React.Component {
             {cart.items.map((product) => (
               <li key={uuidv4()} className="product">
                 <div className="left-side">
-                  <strong className="name">{product.name}</strong>
+                  <p className="name">{product.name}</p>
+                  <div className="price">
+                    <p>
+                      {Math.round(
+                        Number(
+                          product.prices.find(
+                            (el) => el.currency.symbol === currency
+                          ).amount
+                        )
+                      ).toString()}
+                    </p>
+                    <p>{currency}</p>
+                  </div>
                   <ul className="attributes">
                     {product.allAttributes.map((attribute) => (
                       <li key={uuidv4()}>
@@ -86,18 +98,6 @@ class CartOverlay extends React.Component {
                       </li>
                     ))}
                   </ul>
-                  <div className="price">
-                    <p>
-                      {Math.round(
-                        Number(
-                          product.prices.find(
-                            (el) => el.currency.symbol === currency
-                          ).amount
-                        )
-                      ).toString()}
-                    </p>
-                    <p>{currency}</p>
-                  </div>
                 </div>
                 <div className="right-side">
                   <button
