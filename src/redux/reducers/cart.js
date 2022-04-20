@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+
 const INITIAL_STATE = {
   items: [],
   itemsInCart: 0,
@@ -29,8 +30,14 @@ const INITIAL_STATE = {
 const cart = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'ADD_TO_CART':
-      const { name, imageUrl, prices, attributes, quantity } =
-        action.payload;
+      const {
+        name,
+        gallery,
+        prices,
+        attributes,
+        allAttributes,
+        quantity,
+      } = action.payload;
       return {
         itemsInCart: state.itemsInCart + 1,
         total: state.total.map((elem) => {
@@ -48,9 +55,12 @@ const cart = (state = INITIAL_STATE, action) => {
           ...state.items,
           {
             name: name,
-            imageUrl: imageUrl,
+            activeImgNumber: 0,
+            imageUrl: gallery[0],
+            gallery: gallery,
             prices: prices,
             attributes: attributes,
+            allAttributes: allAttributes,
             quantity: quantity,
             id: uuidv4(),
           },
@@ -122,6 +132,42 @@ const cart = (state = INITIAL_STATE, action) => {
                     price.currency.symbol === el.currency.symbol
                 ).amount,
           };
+        }),
+      };
+
+    case 'NEXT_IMAGE':
+      return {
+        ...state,
+        items: state.items.map((item) => {
+          if (
+            item.id === action.payload.id &&
+            item.activeImgNumber < item.gallery.length - 1
+          ) {
+            return {
+              ...item,
+              activeImgNumber: item.activeImgNumber + 1,
+              imageUrl: item.gallery[item.activeImgNumber + 1],
+            };
+          }
+          return item;
+        }),
+      };
+
+    case 'PREV_IMAGE':
+      return {
+        ...state,
+        items: state.items.map((item) => {
+          if (
+            item.id === action.payload.id &&
+            item.activeImgNumber >= 1
+          ) {
+            return {
+              ...item,
+              activeImgNumber: item.activeImgNumber - 1,
+              imageUrl: item.gallery[item.activeImgNumber - 1],
+            };
+          }
+          return item;
         }),
       };
 

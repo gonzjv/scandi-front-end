@@ -1,5 +1,4 @@
 const DESCRIPTION_INITIAL_STATE = {
-  isGalleryAtTop: true,
   data: {
     product: {
       name: '',
@@ -14,7 +13,6 @@ const DESCRIPTION_INITIAL_STATE = {
           items: [
             {
               displayValue: '',
-              value: '',
             },
           ],
         },

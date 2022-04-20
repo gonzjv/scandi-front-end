@@ -5,9 +5,13 @@ import {
   increaseQuantity,
   decreaseQuantity,
   deleteFromCart,
+  nextImage,
+  prevImage,
 } from '../../redux/actions/cart-actions.js';
 import { v4 as uuidv4 } from 'uuid';
 import { unsetMiniCartVisible } from '../../redux/actions/layout-actions.js';
+// import { ReactComponent as SwitcherArrow } from '../../assets/img/switcher-arrow.svg';
+import { ReactComponent as SwitcherArrow } from '../../assets/img/switcher-arrow.svg';
 
 class Cart extends React.Component {
   componentDidMount() {
@@ -35,10 +39,37 @@ class Cart extends React.Component {
               <div className="left-side">
                 <strong>{product.name}</strong>
                 <ul className="attributes">
-                  {Object.keys(product.attributes).map((key) => (
-                    <li className="element" key={key}>
-                      <p className="name">{key}:</p>
-                      <p>{product.attributes[key]}</p>
+                  {product.allAttributes.map((attribute) => (
+                    <li key={uuidv4()}>
+                      <ul className="attribute">
+                        {attribute.name === 'Color' &&
+                          attribute.items.map((item) => (
+                            <li
+                              className={
+                                item.value ===
+                                product.attributes[attribute.name]
+                                  ? 'chosen-color'
+                                  : 'attribute-color'
+                              }
+                              style={{ backgroundColor: item.value }}
+                              key={uuidv4()}
+                            ></li>
+                          ))}
+                        {attribute.name !== 'Color' &&
+                          attribute.items.map((item) => (
+                            <li
+                              className={
+                                item.value ===
+                                product.attributes[attribute.name]
+                                  ? 'chosen-attribute'
+                                  : 'attribute-item'
+                              }
+                              key={uuidv4()}
+                            >
+                              {item.value}
+                            </li>
+                          ))}
+                      </ul>
                     </li>
                   ))}
                 </ul>
@@ -89,11 +120,31 @@ class Cart extends React.Component {
                       -
                     </button>
                   </figcaption>
-                  <img
-                    src={product.imageUrl}
-                    className="image"
-                    alt={product.name}
-                  ></img>
+                  <div className="image-container">
+                    <div className="btns">
+                      <button
+                        onClick={() =>
+                          this.props.prevImage(product.id)
+                        }
+                        className="btn"
+                      >
+                        <SwitcherArrow className="arrow-left" />
+                      </button>
+                      <button
+                        onClick={() =>
+                          this.props.nextImage(product.id)
+                        }
+                        className="btn"
+                      >
+                        <SwitcherArrow className="arrow-right" />
+                      </button>
+                    </div>
+                    <img
+                      src={product.imageUrl}
+                      className="image"
+                      alt={product.name}
+                    ></img>
+                  </div>
                 </figure>
               </div>
             </li>
@@ -123,6 +174,8 @@ const actionCreators = {
   decreaseQuantity,
   deleteFromCart,
   unsetMiniCartVisible,
+  nextImage,
+  prevImage,
 };
 
 export default connect(mapStateToProps, actionCreators)(Cart);

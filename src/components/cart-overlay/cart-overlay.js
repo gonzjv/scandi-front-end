@@ -7,10 +7,10 @@ import {
 } from '../../redux/actions/cart-actions.js';
 import './cart-overlay.css';
 import { v4 as uuidv4 } from 'uuid';
-import {
-  disableBodyScroll,
-  enableBodyScroll,
-} from 'body-scroll-lock';
+// import {
+//   disableBodyScroll,
+//   enableBodyScroll,
+// } from 'body-scroll-lock';
 import { NavLink } from 'react-router-dom';
 
 class CartOverlay extends React.Component {
@@ -18,11 +18,11 @@ class CartOverlay extends React.Component {
 
   componentDidMount() {
     this.targetElem = document.querySelector('#cart-overlay');
-    disableBodyScroll(this.targetElem);
+    // disableBodyScroll(this.targetElem);
   }
 
   componentWillUnmount() {
-    enableBodyScroll(this.targetElem);
+    // enableBodyScroll(this.targetElem);
   }
 
   render() {
@@ -48,17 +48,7 @@ class CartOverlay extends React.Component {
             {cart.items.map((product) => (
               <li key={uuidv4()} className="product">
                 <div className="left-side">
-                  <strong className="name">{product.name}</strong>
-                  <ul className="attributes">
-                    {Object.keys(product.attributes).map((key) => (
-                      <li className="element" key={key}>
-                        <p className="name">{key}:</p>
-                        <em className="value">
-                          {product.attributes[key]}
-                        </em>
-                      </li>
-                    ))}
-                  </ul>
+                  <p className="name">{product.name}</p>
                   <div className="price">
                     <p>
                       {Math.round(
@@ -71,6 +61,43 @@ class CartOverlay extends React.Component {
                     </p>
                     <p>{currency}</p>
                   </div>
+                  <ul className="attributes">
+                    {product.allAttributes.map((attribute) => (
+                      <li key={uuidv4()}>
+                        <ul className="attribute">
+                          {attribute.name === 'Color' &&
+                            attribute.items.map((item) => (
+                              <li
+                                className={
+                                  item.value ===
+                                  product.attributes[attribute.name]
+                                    ? 'chosen-color'
+                                    : 'attribute-color'
+                                }
+                                style={{
+                                  backgroundColor: item.value,
+                                }}
+                                key={uuidv4()}
+                              ></li>
+                            ))}
+                          {attribute.name !== 'Color' &&
+                            attribute.items.map((item) => (
+                              <li
+                                className={
+                                  item.value ===
+                                  product.attributes[attribute.name]
+                                    ? 'chosen-attribute'
+                                    : 'attribute-item'
+                                }
+                                key={uuidv4()}
+                              >
+                                {item.value}
+                              </li>
+                            ))}
+                        </ul>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
                 <div className="right-side">
                   <button
@@ -129,7 +156,6 @@ class CartOverlay extends React.Component {
             <NavLink className="view-bag" to="cart">
               VIEW BAG
             </NavLink>
-            {/* <button className="view-bag"> VIEW BAG</button> */}
             <button className="check-out">CHECK OUT</button>
           </div>
         </footer>

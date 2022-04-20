@@ -13,12 +13,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  /* gap: 20px; */
 }
 
 .cart-overlay .container {
   width: 90%;
-  height: 55%;
+  height: 60%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,6 +27,7 @@
 
 .cart-overlay-header {
   width: 90%;
+  height: 10%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -62,8 +63,8 @@
 .overlay-product-list .product .left-side {
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  margin-left: 5%;
+  gap: 20px;
+  width: 40%;
 }
 
 .overlay-product-list .product .right-side {
@@ -105,15 +106,46 @@
   flex-direction: column;
   list-style: none;
   padding: 0;
-  gap: 10px;
+  gap: 20px;
 }
-.overlay-product-list .attributes .element {
+
+.overlay-product-list .attributes .attribute {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-weight: 100;
+  list-style: none;
+  padding: 0;
+}
+
+.cart-overlay .attribute .chosen-attribute {
+  padding: 3px;
+  background-color: white;
+  border: 1px solid #1d1f22;
+}
+
+.cart-overlay .attribute .chosen-color {
+  min-width: 30px;
+  height: 20px;
+  border: none;
+  box-shadow: 2px 6px 5px rgba(168, 172, 176, 1);
+}
+
+.cart-overlay .attribute .attribute-color {
+  min-width: 30px;
+  height: 20px;
+  opacity: 0.3;
+}
+
+/* .overlay-product-list .attributes .element {
   display: flex;
   align-items: center;
   gap: 10px;
-}
+} */
 
 .overlay-product-list .attributes .value {
+  border: 1px solid #1d1f22;
+  padding: 3px;
   font-size: small;
   font-weight: 300;
 }
@@ -137,9 +169,11 @@
 
 .overlay-footer {
   width: 90%;
+  height: 20%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  justify-content: flex-end;
+  gap: 30px;
   margin-bottom: 5%;
 }
 

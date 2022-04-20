@@ -2,7 +2,7 @@ import { client } from '@tilework/opus';
 import React from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import getDescriptionQuery from './get-description-query.js';
+import getDescriptionQuery from '../../queries/get-description-query.js';
 import DESCRIPTION_INITIAL_STATE from './initial-state.js';
 import './product-description.css';
 import { setMainImageUrl } from '../../redux/actions/main-image-actions.js';
@@ -11,11 +11,16 @@ import {
   clearAttributes,
 } from '../../redux/actions/attributes.js';
 import { addToCart } from '../../redux/actions/cart-actions.js';
+import { ReactComponent as SwitcherArrow } from '../../assets/img/switcher-arrow.svg';
+import parse from 'html-react-parser';
 
 class ProductDescription extends React.Component {
   constructor() {
     super();
     this.state = DESCRIPTION_INITIAL_STATE;
+
+    this.handleHoverUp = this.handleHoverUp.bind(this);
+    this.handleHoverDown = this.handleHoverDown.bind(this);
   }
 
   async componentDidMount() {
@@ -30,18 +35,32 @@ class ProductDescription extends React.Component {
     this.props.clearAttributes();
 
     product.attributes.map((elem) =>
-      this.props.setAttribute(elem.name, elem.items[0].displayValue)
+      this.props.setAttribute(elem.name, elem.items[0].value)
     );
   }
 
+  handleHoverUp() {
+    this.setState({
+      isGalleryAtTop: true,
+    });
+  }
+
+  handleHoverDown() {
+    this.setState({
+      isGalleryAtTop: false,
+    });
+  }
+
   render() {
-    const { data } = this.state;
-    const product = data.product;
-    const setMainImageUrl = this.props.setMainImageUrl;
-    const setAttribute = this.props.setAttribute;
-    const addToCart = this.props.addToCart;
-    const attributes = this.props.attributes;
-    const currency = this.props.currency;
+    const { data, isGalleryAtTop } = this.state;
+    const { product } = data;
+    const {
+      setMainImageUrl,
+      setAttribute,
+      addToCart,
+      attributes,
+      currency,
+    } = this.props;
 
     console.log('data:', data);
 
@@ -49,16 +68,34 @@ class ProductDescription extends React.Component {
       <main className="item-description">
         <section className="descr-left">
           <figure className="gallery">
-            <aside className="sidebar">
-              {product.gallery.map((url) => (
-                <img
-                  key={url}
-                  src={url}
-                  className="sidebar-image"
-                  alt={url}
-                  onClick={() => setMainImageUrl(url)}
-                ></img>
-              ))}
+            <aside className="sidebar-container">
+              <button
+                onMouseEnter={this.handleHoverUp}
+                className="btn-up"
+              >
+                <SwitcherArrow className="rotated" />
+              </button>
+              <div
+                className={
+                  isGalleryAtTop ? 'sidebar' : 'sidebar at-bottom'
+                }
+              >
+                {product.gallery.map((url) => (
+                  <img
+                    key={url}
+                    src={url}
+                    className="sidebar-image"
+                    alt={url}
+                    onClick={() => setMainImageUrl(url)}
+                  ></img>
+                ))}
+              </div>
+              <button
+                onMouseEnter={this.handleHoverDown}
+                className="btn-down"
+              >
+                <SwitcherArrow />
+              </button>
             </aside>
             <img
               src={this.props.imageUrl}
@@ -77,25 +114,37 @@ class ProductDescription extends React.Component {
               <div className="attribute" key={attribute.name}>
                 <strong>{attribute.name}:</strong>
                 <div className="values">
-                  {attribute.items.map((item) => (
-                    <button
-                      className={
-                        item.displayValue ===
-                        attributes[attribute.name]
-                          ? 'chosen-attribute'
-                          : 'attribute-btn'
-                      }
-                      key={item.displayValue}
-                      onClick={() =>
-                        setAttribute(
-                          attribute.name,
-                          item.displayValue
-                        )
-                      }
-                    >
-                      {item.displayValue}
-                    </button>
-                  ))}
+                  {attribute.name === 'Color' &&
+                    attribute.items.map((item) => (
+                      <button
+                        className={
+                          item.value === attributes[attribute.name]
+                            ? 'chosen-color'
+                            : 'attribute-btn'
+                        }
+                        style={{ backgroundColor: item.value }}
+                        key={item.value}
+                        onClick={() =>
+                          setAttribute(attribute.name, item.value)
+                        }
+                      ></button>
+                    ))}
+                  {attribute.name !== 'Color' &&
+                    attribute.items.map((item) => (
+                      <button
+                        className={
+                          item.value === attributes[attribute.name]
+                            ? 'chosen-attribute'
+                            : 'attribute-btn'
+                        }
+                        key={item.value}
+                        onClick={() =>
+                          setAttribute(attribute.name, item.value)
+                        }
+                      >
+                        {item.displayValue}
+                      </button>
+                    ))}
                 </div>
               </div>
             ))}
@@ -118,26 +167,22 @@ class ProductDescription extends React.Component {
               <p className="price-out-of-stock">OUT OF STOCK</p>
             )}
           </div>
-          {console.log('inStock', product.inStock)}
           <button
             disabled={product.inStock ? false : true}
             onClick={() =>
               addToCart(
                 product.name,
-                product.gallery[0],
+                product.gallery,
                 product.prices,
-                attributes
+                attributes,
+                product.attributes
               )
             }
             className="add-to-cart"
           >
             {'add to cart'.toUpperCase()}
           </button>
-          <p
-            dangerouslySetInnerHTML={{
-              __html: data.product.description,
-            }}
-          />
+          <div>{parse(data.product.description)}</div>
         </section>
       </main>
     );
