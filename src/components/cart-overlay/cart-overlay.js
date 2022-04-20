@@ -7,10 +7,10 @@ import {
 } from '../../redux/actions/cart-actions.js';
 import './cart-overlay.css';
 import { v4 as uuidv4 } from 'uuid';
-import {
-  disableBodyScroll,
-  enableBodyScroll,
-} from 'body-scroll-lock';
+// import {
+//   disableBodyScroll,
+//   enableBodyScroll,
+// } from 'body-scroll-lock';
 import { NavLink } from 'react-router-dom';
 
 class CartOverlay extends React.Component {

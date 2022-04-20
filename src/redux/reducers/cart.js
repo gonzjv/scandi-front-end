@@ -31,7 +31,7 @@ const cart = (state = INITIAL_STATE, action) => {
     case 'ADD_TO_CART':
       const {
         name,
-        imageUrl,
+        gallery,
         prices,
         attributes,
         allAttributes,
@@ -54,7 +54,9 @@ const cart = (state = INITIAL_STATE, action) => {
           ...state.items,
           {
             name: name,
-            imageUrl: imageUrl,
+            activeImgNumber: 0,
+            imageUrl: gallery[0],
+            gallery: gallery,
             prices: prices,
             attributes: attributes,
             allAttributes: allAttributes,
@@ -129,6 +131,42 @@ const cart = (state = INITIAL_STATE, action) => {
                     price.currency.symbol === el.currency.symbol
                 ).amount,
           };
+        }),
+      };
+
+    case 'NEXT_IMAGE':
+      return {
+        ...state,
+        items: state.items.map((item) => {
+          if (
+            item.id === action.payload.id &&
+            item.activeImgNumber < item.gallery.length - 1
+          ) {
+            return {
+              ...item,
+              activeImgNumber: item.activeImgNumber + 1,
+              imageUrl: item.gallery[item.activeImgNumber + 1],
+            };
+          }
+          return item;
+        }),
+      };
+
+    case 'PREV_IMAGE':
+      return {
+        ...state,
+        items: state.items.map((item) => {
+          if (
+            item.id === action.payload.id &&
+            item.activeImgNumber >= 1
+          ) {
+            return {
+              ...item,
+              activeImgNumber: item.activeImgNumber - 1,
+              imageUrl: item.gallery[item.activeImgNumber - 1],
+            };
+          }
+          return item;
         }),
       };
 

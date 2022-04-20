@@ -1,6 +1,6 @@
 export const addToCart = (
   name,
-  imageUrl,
+  gallery,
   prices,
   attributes,
   allAttributes
@@ -9,7 +9,7 @@ export const addToCart = (
     type: 'ADD_TO_CART',
     payload: {
       name: name,
-      imageUrl: imageUrl,
+      gallery: gallery,
       prices: prices,
       attributes: attributes,
       allAttributes: allAttributes,
@@ -35,4 +35,12 @@ export const increaseQuantity = (id) => {
 
 export const decreaseQuantity = (id) => {
   return { type: 'DECREASE_QUANTITY', payload: { id: id } };
+};
+
+export const nextImage = (id) => {
+  return { type: 'NEXT_IMAGE', payload: { id: id } };
+};
+
+export const prevImage = (id) => {
+  return { type: 'PREV_IMAGE', payload: { id: id } };
 };

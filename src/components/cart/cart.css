@@ -109,3 +109,41 @@
 .plus-minus-btn:active {
   background: #e5e5e5;
 }
+
+.cart .image-container {
+  position: relative;
+}
+
+.cart .btns {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart .btn {
+  height: 100%;
+  width: 20%;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.cart .btn:hover {
+  height: 100%;
+  width: 20%;
+  background: white;
+  opacity: 0.3;
+  border: 0;
+}
+
+.cart .arrow-left {
+  transform: rotate(90deg);
+}
+
+.cart .arrow-right {
+  transform: rotate(-90deg);
+}

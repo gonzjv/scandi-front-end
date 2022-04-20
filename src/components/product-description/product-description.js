@@ -171,7 +171,7 @@ class ProductDescription extends React.Component {
             onClick={() =>
               addToCart(
                 product.name,
-                product.gallery[0],
+                product.gallery,
                 product.prices,
                 attributes,
                 product.attributes
