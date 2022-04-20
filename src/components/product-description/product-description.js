@@ -12,6 +12,7 @@ import {
 } from '../../redux/actions/attributes.js';
 import { addToCart } from '../../redux/actions/cart-actions.js';
 import { ReactComponent as SwitcherArrow } from '../../assets/img/switcher-arrow.svg';
+import parse from 'html-react-parser';
 
 class ProductDescription extends React.Component {
   constructor() {
@@ -181,11 +182,7 @@ class ProductDescription extends React.Component {
           >
             {'add to cart'.toUpperCase()}
           </button>
-          <p
-            dangerouslySetInnerHTML={{
-              __html: data.product.description,
-            }}
-          />
+          <div>{parse(data.product.description)}</div>
         </section>
       </main>
     );
