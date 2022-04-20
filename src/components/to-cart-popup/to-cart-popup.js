@@ -6,6 +6,7 @@ import { setAttribute } from '../../redux/actions/attributes.js';
 import { addToCart } from '../../redux/actions/cart-actions.js';
 import DESCRIPTION_INITIAL_STATE from './initial-state.js';
 import getDescriptionQuery from '../../queries/get-description-query.js';
+import { v4 as uuidv4 } from 'uuid';
 
 class ToCartPopup extends React.Component {
   constructor() {
@@ -50,7 +51,7 @@ class ToCartPopup extends React.Component {
             </div>
             <div className="attributes">
               {product.attributes.map((attribute) => (
-                <div className="attribute" key={attribute.name}>
+                <div className="attribute" key={uuidv4()}>
                   <strong>{attribute.name}:</strong>
                   <div className="values">
                     {attribute.name === 'Color' &&
@@ -62,7 +63,7 @@ class ToCartPopup extends React.Component {
                               : 'attribute-btn'
                           }
                           style={{ backgroundColor: item.value }}
-                          key={item.value}
+                          key={uuidv4()}
                           onClick={() =>
                             setAttribute(attribute.name, item.value)
                           }
@@ -76,7 +77,7 @@ class ToCartPopup extends React.Component {
                               ? 'chosen-attribute'
                               : 'attribute-btn'
                           }
-                          key={item.value}
+                          key={uuidv4()}
                           onClick={() =>
                             setAttribute(attribute.name, item.value)
                           }
