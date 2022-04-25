@@ -69,12 +69,22 @@ class ProductDescription extends React.Component {
         <section className="descr-left">
           <figure className="gallery">
             <aside className="sidebar-container">
-              <button
-                onMouseEnter={this.handleHoverUp}
-                className="btn-up"
-              >
-                <SwitcherArrow className="rotated" />
-              </button>
+              {product.gallery.length > 3 && (
+                <button
+                  onMouseEnter={this.handleHoverUp}
+                  className="btn-up"
+                >
+                  <SwitcherArrow className="rotated" />
+                </button>
+              )}
+              {product.gallery.length > 3 && (
+                <button
+                  onMouseEnter={this.handleHoverDown}
+                  className="btn-down"
+                >
+                  <SwitcherArrow />
+                </button>
+              )}
               <div
                 className={
                   isGalleryAtTop ? 'sidebar' : 'sidebar at-bottom'
@@ -90,12 +100,6 @@ class ProductDescription extends React.Component {
                   ></img>
                 ))}
               </div>
-              <button
-                onMouseEnter={this.handleHoverDown}
-                className="btn-down"
-              >
-                <SwitcherArrow />
-              </button>
             </aside>
             <img
               src={this.props.imageUrl}
